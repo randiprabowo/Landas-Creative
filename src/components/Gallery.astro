@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ContentImage from './ContentImage.astro';
+interface Props { images: CollectionEntry<'projects'>['data']['images']; photoLabel?: string; id: string; label?: string; ratio?: '3 / 2' | 'auto'; }
+const { images, photoLabel = 'Foto dokumentasi', id, label = 'Galeri dokumentasi', ratio = '3 / 2' } = Astro.props;
+const permitted = images.filter((image) => image.permissionConfirmed);
+const kindLabel = (kind: string) => kind === 'visualisasi-3d' ? 'Visualisasi 3D' : kind === 'ilustrasi' ? 'Ilustrasi' : photoLabel;
+---
+<div class="gallery" data-gallery role="group" aria-label={label}>
+  <div class="gallery-panels">{permitted.length ? permitted.map((image, index) => <div class="gallery-panel" data-gallery-panel id={`${id}-image-${index + 1}`}>
+    <ContentImage {...image} photoLabel={photoLabel} ratio={ratio} fit="contain" priority={index === 0} sizes="(min-width: 1280px) 1200px, 100vw" />
+    <button class="button button--secondary gallery-enlarge" type="button" data-gallery-enlarge data-full-src={image.src.src} hidden aria-haspopup="dialog">Perbesar gambar {index + 1}<span aria-hidden="true"> ↗</span></button>
+  </div>) : <ContentImage alt="Dokumentasi gambar belum tersedia" />}</div>
+  {permitted.length > 1 && <div class="gallery-thumbnails" data-gallery-thumbnails role="group" aria-label="Pilih gambar" hidden>{permitted.map((image, index) => <button class="gallery-thumbnail" type="button" data-gallery-thumbnail aria-pressed={index === 0 ? 'true' : 'false'} aria-controls={`${id}-image-${index + 1}`} aria-label={`Gambar ${index + 1} dari ${permitted.length}: ${image.alt}. ${kindLabel(image.kind)}`}>
+    <Image src={image.src} alt="" width={120} height={90} fit="contain" loading="lazy" /><span>{index + 1}</span>
+  </button>)}</div>}
+  {permitted.length > 0 && <>
+    <p class="gallery-status" data-gallery-status role="status" aria-live="polite" aria-atomic="true" hidden></p>
+    <dialog class="gallery-dialog" data-gallery-dialog aria-labelledby={`${id}-dialog-title`}>
+      <div class="dialog-heading"><h2 id={`${id}-dialog-title`}>{label}</h2><button class="button button--secondary" type="button" data-gallery-close autofocus>Tutup <span aria-hidden="true">×</span></button></div>
+      <figure><img data-gallery-full alt="" /><figcaption data-gallery-full-caption></figcaption><p data-gallery-full-error hidden>Gambar tidak dapat dimuat. Tutup tampilan ini untuk kembali ke galeri.</p></figure>
+    </dialog>
+  </>}
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((root) => {
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-gallery-panel]')];
+    const thumbnails = [...root.querySelectorAll<HTMLButtonElement>('[data-gallery-thumbnail]')];
+    const status = root.querySelector<HTMLElement>('[data-gallery-status]');
+    const dialog = root.querySelector<HTMLDialogElement>('[data-gallery-dialog]');
+    const full = dialog?.querySelector<HTMLImageElement>('[data-gallery-full]');
+    const caption = dialog?.querySelector<HTMLElement>('[data-gallery-full-caption]');
+    const fullError = dialog?.querySelector<HTMLElement>('[data-gallery-full-error]');
+    let trigger: HTMLButtonElement | undefined;
+    const select = (index: number) => {
+      panels.forEach((panel, at) => { panel.hidden = at !== index; });
+      thumbnails.forEach((button, at) => button.setAttribute('aria-pressed', String(at === index)));
+      if (status) { status.hidden = false; status.textContent = `Gambar ${index + 1} dari ${panels.length}`; }
+    };
+    thumbnails.forEach((button, index) => {
+      button.addEventListener('click', () => select(index));
+      button.addEventListener('keydown', (event) => {
+        const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+        if (!keys.includes(event.key)) return;
+        event.preventDefault();
+        const target = event.key === 'Home' ? 0 : event.key === 'End' ? thumbnails.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + thumbnails.length) % thumbnails.length;
+        select(target); thumbnails[target]?.focus();
+      });
+      // Thumbnail hanya dekoratif; nomor dan label tombol tetap tersedia saat gambar gagal.
+      const image = button.querySelector('img');
+      image?.addEventListener('error', () => { image.hidden = true; });
+      if (image?.complete && image.naturalWidth === 0) image.hidden = true;
+    });
+    const thumbs = root.querySelector<HTMLElement>('[data-gallery-thumbnails]');
+    if (thumbs) thumbs.hidden = false;
+    if (panels.length) select(0);
+    if (dialog && full && caption && fullError && typeof dialog.showModal === 'function') {
+      root.querySelectorAll<HTMLButtonElement>('[data-gallery-enlarge]').forEach((button) => {
+        button.hidden = false;
+        button.addEventListener('click', () => {
+          const panel = button.closest<HTMLElement>('[data-gallery-panel]')!;
+          const image = panel.querySelector<HTMLImageElement>('[data-content-img]');
+          if (!image) return;
+          trigger = button;
+          full.hidden = false; fullError.hidden = true;
+          full.alt = image.alt; full.src = button.dataset.fullSrc!;
+          caption.textContent = [panel.querySelector('.image-kind')?.textContent, panel.querySelector('figcaption')?.textContent].filter(Boolean).join(' · ');
+          dialog.showModal();
+        });
+      });
+      full.addEventListener('error', () => { full.hidden = true; fullError.hidden = false; });
+      const closeButton = dialog.querySelector<HTMLButtonElement>('[data-gallery-close]')!;
+      closeButton.addEventListener('click', () => dialog.close());
+      // Satu-satunya kontrol dialog adalah Tutup; Tab tetap berada pada kontrol ini.
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab') { event.preventDefault(); closeButton.focus(); }
+      });
+      // Native dialog menangani Escape dan inert di luar modal.
+      dialog.addEventListener('close', () => { full.removeAttribute('src'); trigger?.focus(); });
+    }
+  });
+</script>
+<style>
+  .gallery { min-width: 0; }
+  .gallery-panels { display: grid; gap: var(--space-6); }
+  .gallery-panel { min-width: 0; overflow: hidden; border-radius: var(--radius-card); }
+  .gallery-enlarge { margin-top: var(--space-3); }
+  .gallery-thumbnails { display: flex; gap: var(--space-3); overflow-x: auto; padding: var(--space-3) var(--space-2); margin-top: var(--space-4); }
+  .gallery-thumbnail { position: relative; flex: 0 0 96px; min-width: 0; padding: 4px; border: 2px solid var(--color-control-border); border-radius: var(--radius-control); background: var(--color-surface); color: var(--color-ink); }
+  .gallery-thumbnail[aria-pressed='true'] { border-color: var(--color-brand); box-shadow: inset 0 0 0 2px var(--color-brand); }
+  .gallery-thumbnail img { width: 100%; height: 64px; object-fit: contain; }
+  .gallery-thumbnail span { display: block; font-weight: 600; font-size: var(--text-caption); }
+  .gallery-status { margin-block: var(--space-2) 0; color: var(--color-muted); font-size: var(--text-caption); }
+  .gallery-dialog { width: min(1200px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-card); color: var(--color-ink); background: var(--color-canvas); overflow: auto; }
+  .gallery-dialog::backdrop { background: rgb(25 45 58 / 85%); }
+  .dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-4); }
+  .dialog-heading h2 { margin: 0; font-size: 1.125rem; }
+  .gallery-dialog figure { margin: 0; }
+  .gallery-dialog img { margin-inline: auto; width: auto; max-width: 100%; height: auto; max-height: 75dvh; object-fit: contain; }
+  .gallery-dialog figcaption { margin-top: var(--space-3); font-size: var(--text-caption); }
+  @media (min-width: 768px) { .gallery-dialog { padding: var(--space-6); } }
+</style>

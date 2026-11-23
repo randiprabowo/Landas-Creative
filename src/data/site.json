@@ -1,0 +1,17 @@
+{
+  "brandName": "Landas Creative",
+  "tagline": "Foundations & Growth",
+  "logo": "src/assets/brand/logo.jpeg",
+  "whatsappNumber": "6287851996059",
+  "whatsappConfirmed": false,
+  "email": null,
+  "publicAddress": null,
+  "serviceAreas": [],
+  "socialLinks": [],
+  "siteUrl": null,
+  "indexingEnabled": false,
+  "defaultSeo": {
+    "title": "Landas Creative | Foundations & Growth",
+    "description": "Landas Creative membantu kebutuhan pembangunan rumah, desain 3D, sumur bor, atap spandek dan baja ringan, serta pemasaran properti."
+  }
+}

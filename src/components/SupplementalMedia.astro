@@ -1,0 +1,126 @@
+---
+import type { ModelMedia, VideoMedia } from '../schemas/media';
+import { modelHref, parseYouTubeId } from '../utils/media';
+
+interface Props {
+  id: string;
+  video?: VideoMedia;
+  model?: ModelMedia;
+}
+
+const { id, video, model } = Astro.props;
+const videoId = video?.permissionConfirmed ? parseYouTubeId(video.url) : undefined;
+const videoLink = videoId ? 'https://www.youtube.com/watch?v=' + videoId : undefined;
+const modelUrl = model?.permissionConfirmed ? modelHref(model.src) : undefined;
+---
+{(videoId || modelUrl) && <div class="media-options" data-supplemental-media>
+  <div class="media-actions">
+    {videoId && <button class="button button--secondary" type="button" data-media-open="video" aria-haspopup="dialog" hidden>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="m10 9 5 3-5 3z" stroke-linejoin="round"/></svg>
+      Video YouTube
+    </button>}
+    {modelUrl && <button class="button button--secondary" type="button" data-media-open="model" aria-haspopup="dialog" hidden>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m12 2.8 8.5 4.6v9.2L12 21.2l-8.5-4.6V7.4L12 2.8Zm0 18.4V12m8.5-4.6L12 12 3.5 7.4" stroke-linejoin="round"/></svg>
+      Jelajahi Model 3D
+    </button>}
+  </div>
+  <noscript>
+    {videoLink && <a class="button button--secondary" href={videoLink}>Tonton di YouTube</a>}
+    {modelUrl && <a class="button button--secondary" href={modelUrl} download>Unduh Model 3D</a>}
+  </noscript>
+
+  {videoId && video && <dialog data-media-dialog="video" aria-labelledby={id + '-video'}>
+    <header class="media-heading"><h2 id={id + '-video'}>{video.title}</h2><form method="dialog"><button class="media-close" type="submit" autofocus>Tutup</button></form></header>
+    <div class="media-stage media-stage--video" data-media-stage></div>
+    <template>
+      <iframe title={video.title} src={`https://www.youtube-nocookie.com/embed/${videoId}?playsinline=1`}
+        allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </template>
+    <div class="media-notes">
+      {video.caption && <p>{video.caption}</p>}
+      <a href={videoLink} target="_blank" rel="noopener noreferrer">Tonton di YouTube <span class="sr-only">(tab baru)</span><span aria-hidden="true">↗</span></a>
+    </div>
+  </dialog>}
+
+  {modelUrl && model && <dialog data-media-dialog="model" aria-labelledby={id + '-model'} data-model-url={modelUrl} data-model-title={model.title}>
+    <header class="media-heading"><div><p class="eyebrow">Visualisasi 3D</p><h2 id={id + '-model'}>{model.title}</h2></div><form method="dialog"><button class="media-close" type="submit" autofocus>Tutup</button></form></header>
+    <div class="media-stage media-stage--model" data-media-stage></div>
+    <div class="media-notes"><p>{model.caption}</p><p class="media-instructions" data-model-help>Geser atau gunakan tombol panah untuk memutar model. Cubit untuk memperbesar pada layar sentuh.</p><a href={modelUrl} download>Unduh .glb</a></div>
+  </dialog>}
+</div>}
+
+<script>
+  async function showModel(dialog: HTMLDialogElement, stage: HTMLElement) {
+    const status = document.createElement('p');
+    status.className = 'media-status';
+    status.setAttribute('role', 'status');
+    status.textContent = 'Memuat model 3D…';
+    stage.append(status);
+    const help = dialog.querySelector<HTMLElement>('[data-model-help]')!;
+    help.hidden = true;
+    const failed = () => {
+      stage.querySelector('model-viewer')?.remove();
+      status.hidden = false;
+      status.textContent = 'Model tidak dapat ditampilkan di perangkat ini. Gunakan tautan unduh atau kembali ke gambar.';
+      help.hidden = true;
+    };
+    try {
+      await import('@google/model-viewer');
+      if (!dialog.open || !status.isConnected) return;
+      const viewer = document.createElement('model-viewer');
+      viewer.setAttribute('alt', dialog.dataset.modelTitle!);
+      viewer.setAttribute('camera-controls', '');
+      viewer.setAttribute('touch-action', 'pan-y');
+      viewer.setAttribute('interaction-prompt', 'none');
+      viewer.setAttribute('disable-pan', '');
+      viewer.addEventListener('load', () => { status.hidden = true; help.hidden = false; }, { once: true });
+      viewer.addEventListener('error', failed, { once: true });
+      viewer.setAttribute('src', dialog.dataset.modelUrl!);
+      stage.prepend(viewer);
+    } catch {
+      if (status.isConnected) failed();
+    }
+  }
+
+  document.querySelectorAll('[data-supplemental-media]').forEach((root) => {
+    root.querySelectorAll<HTMLButtonElement>('[data-media-open]').forEach((button) => {
+      const dialog = root.querySelector<HTMLDialogElement>(`[data-media-dialog="${button.dataset.mediaOpen}"]`)!;
+      const stage = dialog.querySelector<HTMLElement>('[data-media-stage]')!;
+      const video = dialog.querySelector<HTMLTemplateElement>('template');
+      button.addEventListener('click', () => {
+        dialog.showModal();
+        if (video) stage.append(video.content.cloneNode(true));
+        else void showModel(dialog, stage);
+      });
+      dialog.addEventListener('close', () => {
+        stage.replaceChildren();
+        button.focus({ preventScroll: true });
+      });
+      button.hidden = false;
+    });
+  });
+</script>
+
+<style>
+  .media-options { margin-top: var(--space-4); }
+  .media-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .media-actions .button { padding-inline: var(--space-4); font-size: var(--text-caption); }
+  .media-actions svg { flex-shrink: 0; }
+  dialog { width: min(54rem, calc(100% - 2rem)); max-height: calc(100% - 2rem); padding: 0; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); color: var(--color-ink); }
+  dialog::backdrop { background: rgb(12 27 34 / 78%); }
+  .media-heading { display: flex; justify-content: space-between; align-items: start; gap: var(--space-4); padding: var(--space-4); }
+  .media-heading h2 { font-size: var(--text-h3); margin: 0; }
+  .media-heading .eyebrow { margin: 0 0 var(--space-1); }
+  .media-close { min-width: 4rem; min-height: 44px; border: 1px solid var(--color-control-border); background: var(--color-surface); color: var(--color-ink); }
+  .media-close:hover { background: var(--color-surface-soft); }
+  .media-stage { position: relative; }
+  .media-stage--video { min-height: 200px; aspect-ratio: 16 / 9; background: var(--color-ink); }
+  .media-stage--model { height: clamp(13rem, 52vh, 32rem); background: var(--color-surface-soft); }
+  .media-stage :global(iframe), .media-stage :global(model-viewer) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  .media-stage :global(.media-status) { position: absolute; inset: 0; margin: auto; padding: var(--space-6); display: grid; place-items: center; text-align: center; pointer-events: none; }
+  .media-notes { padding: var(--space-4); font-size: var(--text-caption); }
+  .media-notes p { margin-bottom: var(--space-2); }
+  .media-notes a { display: inline-flex; align-items: center; min-height: 44px; }
+  .media-instructions { color: var(--color-muted); }
+  @media (min-width: 768px) { .media-heading, .media-notes { padding-inline: var(--space-6); } }
+</style>

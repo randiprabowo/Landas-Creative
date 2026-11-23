@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { pages } from '../data/pages';
+const copy = pages.notFound;
+---
+
+<BaseLayout title={copy.seoTitle} description={copy.seoDescription} noindex>
+  <section class="section container error-page">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
+    <p class="muted">{copy.description}</p>
+    <a class="button" href="/">{copy.actionLabel} <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-page { min-height: 55vh; }
+  h1 { max-width: 18ch; }
+  .button { margin-top: var(--space-4); }
+</style>

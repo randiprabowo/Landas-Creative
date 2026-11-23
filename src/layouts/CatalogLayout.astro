@@ -1,0 +1,20 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+interface Props { label: string; eyebrow: string; title: string; description: string; }
+const { label, eyebrow, title, description } = Astro.props;
+---
+<BaseLayout title={`${label} | Landas Creative`} description={description}>
+  <div class="container page-breadcrumb"><Breadcrumb items={[{ label: 'Beranda', href: '/' }, { label }]} /></div>
+  <header class="page-heading"><div class="container"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p class="page-description">{description}</p></div></header>
+  <div class="container section catalog-content"><slot /></div>
+</BaseLayout>
+<style>
+  .page-breadcrumb { padding-top: var(--space-6); }
+  .page-heading { padding-block: var(--space-6) var(--space-12); border-bottom: 1px solid var(--color-border); }
+  .eyebrow { margin-bottom: var(--space-4); }
+  h1 { max-width: 24ch; font-size: clamp(2.125rem, 1.7rem + 1.5vw, 3rem); margin-bottom: var(--space-6); }
+  .page-description { color: var(--color-muted); max-width: 65ch; margin-bottom: 0; }
+  .catalog-content { min-height: 22rem; }
+  @media (min-width: 1024px) { .page-heading { padding-block: var(--space-8) var(--space-16); } .page-description { font-size: var(--text-lead); } }
+</style>

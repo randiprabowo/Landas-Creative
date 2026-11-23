@@ -1,0 +1,104 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PropertyCard from './PropertyCard.astro';
+import EmptyState from './EmptyState.astro';
+import { pages } from '../data/pages';
+import { detailHref } from '../data/navigation';
+import { propertyTypeLabels, availabilityLabels } from '../data/labels';
+import { findProperties, defaultFilters } from '../utils/property-search';
+import '../styles/forms.css';
+interface Props { entries: CollectionEntry<'properties'>[]; demo?: boolean; }
+const { entries, demo = false } = Astro.props;
+const visible = entries.filter(({ data }) => data.publishStatus === 'published' || (import.meta.env.DEV && demo));
+const searchable = visible.map((entry) => ({ ...entry.data, id: entry.id, price: entry.data.priceConfirmed ? entry.data.price : undefined, entry }));
+const sorted = findProperties(searchable, defaultFilters);
+const regions = [...new Set(visible.map(({ data }) => data.region))].sort((a, b) => a.localeCompare(b, 'id'));
+const copy = pages.properties;
+---
+{visible.length ? <div data-property-catalog>
+  <form class="property-controls" data-property-controls hidden novalidate>
+    <div class="search-sort">
+      <div class="field"><label for="property-query">Cari nama atau lokasi</label><input id="property-query" name="query" type="search" placeholder="Nama properti, wilayah, atau lokasi" maxlength="120" /></div>
+      <div class="field"><label for="property-sort">Urutkan</label><select id="property-sort" name="sort"><option value="featured">Unggulan</option><option value="newest">Terbaru diperbarui</option><option value="price-asc">Harga terendah</option><option value="price-desc">Harga tertinggi</option></select></div>
+    </div>
+    <details data-property-filters open><summary>Filter properti <span data-filter-count></span></summary>
+      <div class="filter-fields">
+        <div class="field"><label for="property-type">Tipe properti</label><select id="property-type" name="type"><option value="">Semua tipe</option>{Object.entries(propertyTypeLabels).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
+        <div class="field"><label for="property-region">Wilayah</label><select id="property-region" name="region"><option value="">Semua wilayah</option>{regions.map((region) => <option>{region}</option>)}</select></div>
+        <div class="field"><label for="property-status">Status ketersediaan</label><select id="property-status" name="availability"><option value="">Semua status</option>{Object.entries(availabilityLabels).map(([value, label]) => <option value={value}>{label}</option>)}</select></div>
+        <div class="field"><label for="property-min">Harga minimum (Rp)</label><input id="property-min" name="min" inputmode="numeric" type="text" maxlength="16" aria-describedby="property-price-help property-price-error" placeholder="Contoh: 300000000" /></div>
+        <div class="field"><label for="property-max">Harga maksimum (Rp)</label><input id="property-max" name="max" inputmode="numeric" type="text" maxlength="16" aria-describedby="property-price-help property-price-error" placeholder="Contoh: 600000000" /></div>
+      </div>
+      <p id="property-price-help" class="field-help">Masukkan angka rupiah tanpa titik atau koma. Properti tanpa harga tidak disertakan saat rentang harga digunakan.</p>
+      <p id="property-price-error" class="field-error" role="alert" hidden></p>
+    </details>
+    <p class="field-help" data-property-active hidden></p>
+    <div class="form-actions"><button class="button" type="submit">Terapkan Filter</button><button class="button button--secondary" type="reset">Reset Pencarian & Filter</button></div>
+  </form>
+  <noscript><p class="muted">Aktifkan JavaScript untuk pencarian, filter, dan pengurutan. Semua properti tetap tersedia di bawah ini.</p></noscript>
+  <p class="catalog-results" data-property-count role="status" aria-live="polite" aria-atomic="true">{sorted.length} properti</p>
+  <h2 class="sr-only">Daftar properti</h2>
+  <div class="card-grid" data-property-grid>{sorted.map(({ entry, ...item }) => <div data-property-item data-id={item.id} data-title={item.title} data-region={item.region} data-location={item.publicLocation} data-type={item.propertyType} data-availability={item.availability} data-featured={String(item.featured)} data-updated={item.updatedAt} data-price={item.price}>
+    <PropertyCard data={entry.data} demo={demo} href={demo ? entry.data.availability === 'terjual' ? '/_preview/detail/properti-terjual' : '/_preview/detail/properti' : detailHref('properties', entry.data.slug)} />
+  </div>)}</div>
+  <div data-property-no-results hidden><EmptyState id="property-no-results" title="Belum ada properti yang sesuai." description="Coba ubah atau reset filter, atau konsultasikan kebutuhan Anda melalui halaman kontak." actionLabel="Konsultasikan Kebutuhan" actionHref="/kontak#pesan" /></div>
+</div> : <EmptyState id="properties-empty" title={copy.emptyTitle} description={copy.emptyDescription} actionLabel={copy.actionLabel} actionHref={copy.actionHref} />}
+<script>
+  import { defaultFilters, findProperties, parsePriceRange, type PropertyFilters, type SearchableProperty } from '../utils/property-search';
+  document.querySelectorAll<HTMLElement>('[data-property-catalog]').forEach((root) => {
+    const form = root.querySelector<HTMLFormElement>('[data-property-controls]')!;
+    const grid = root.querySelector<HTMLElement>('[data-property-grid]')!;
+    const nodes = [...grid.querySelectorAll<HTMLElement>('[data-property-item]')];
+    const items: SearchableProperty[] = nodes.map(({ dataset: d }) => ({ id: d.id!, title: d.title!, region: d.region!, publicLocation: d.location!, propertyType: d.type!, availability: d.availability!, featured: d.featured === 'true', updatedAt: d.updated!, price: d.price === undefined ? undefined : Number(d.price) }));
+    const elements = new Map(nodes.map((node) => [node.dataset.id, node]));
+    const count = root.querySelector<HTMLElement>('[data-property-count]')!;
+    const error = root.querySelector<HTMLElement>('#property-price-error')!;
+    const input = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement;
+    const read = () => Object.fromEntries(Object.keys(defaultFilters).map((key) => [key, input(key).value])) as unknown as PropertyFilters;
+    function apply(focusError = false) {
+      const filters = read();
+      const range = parsePriceRange(filters.min, filters.max);
+      input('min').removeAttribute('aria-invalid'); input('max').removeAttribute('aria-invalid');
+      error.hidden = !range.error; error.textContent = range.error ?? '';
+      if (range.error) {
+        root.querySelector<HTMLDetailsElement>('[data-property-filters]')!.open = true;
+        input(range.field!).setAttribute('aria-invalid', 'true');
+        if (focusError) input(range.field!).focus();
+        return;
+      }
+      const found = findProperties(items, filters);
+      const ids = new Set(found.map((item) => item.id));
+      nodes.forEach((node) => { node.hidden = !ids.has(node.dataset.id!); });
+      found.forEach((item) => grid.append(elements.get(item.id)!));
+      root.querySelector<HTMLElement>('[data-property-no-results]')!.hidden = found.length !== 0;
+      count.textContent = `${found.length} dari ${items.length} properti${filters.query.trim() ? ` untuk “${filters.query.trim()}”` : ''}`;
+      const active = ['type', 'region', 'availability', 'min', 'max'].filter((key) => input(key).value.trim()).length;
+      root.querySelector<HTMLElement>('[data-filter-count]')!.textContent = active ? `(${active} aktif)` : '';
+      const labels = ['type', 'region', 'availability'].filter((key) => input(key).value).map((key) => (input(key) as HTMLSelectElement).selectedOptions[0]!.textContent);
+      const rupiah = (value: string) => `Rp${Number(value).toLocaleString('id-ID')}`;
+      if (filters.min.trim()) labels.push(`Min. ${rupiah(filters.min)}`);
+      if (filters.max.trim()) labels.push(`Maks. ${rupiah(filters.max)}`);
+      const activeSummary = root.querySelector<HTMLElement>('[data-property-active]')!;
+      activeSummary.hidden = !active; activeSummary.textContent = active ? `Filter aktif: ${labels.join(' · ')}` : '';
+    }
+    form.addEventListener('submit', (event) => { event.preventDefault(); apply(true); });
+    form.addEventListener('change', () => apply());
+    let timer: ReturnType<typeof setTimeout>;
+    input('query').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(() => apply(), 180); });
+    form.addEventListener('reset', () => { clearTimeout(timer); setTimeout(() => apply(), 0); });
+    const details = root.querySelector<HTMLDetailsElement>('[data-property-filters]')!;
+    details.open = window.matchMedia('(min-width: 768px)').matches;
+    form.hidden = false;
+    apply();
+  });
+</script>
+<style>
+  .property-controls { display: grid; gap: var(--space-6); padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); }
+  .search-sort, .filter-fields { display: grid; gap: var(--space-4); }
+  summary { cursor: pointer; min-height: 48px; padding-block: var(--space-3); font-weight: 600; }
+  .filter-fields { padding-block: var(--space-3) var(--space-4); }
+  .catalog-results { margin-block: var(--space-6); font-weight: 600; }
+  [data-property-item] { min-width: 0; }
+  @media (min-width: 768px) { .search-sort { grid-template-columns: 2fr 1fr; } .filter-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .filter-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+</style>

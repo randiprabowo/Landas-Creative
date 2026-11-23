@@ -1,0 +1,17 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import MessageForm from '../components/MessageForm.astro';
+import { contactCopy } from '../data/contact';
+import '../styles/contact.css';
+const copy = contactCopy.partnership;
+---
+<CatalogLayout label="Kemitraan" {...copy}>
+  <div class="contact-grid">
+    <section class="contact-information" aria-labelledby="partnership-information-title"><p class="eyebrow">Agen pemasaran properti</p><h2 id="partnership-information-title">{copy.informationTitle}</h2><p>{copy.introduction}</p>
+      <div class="partnership-terms">{(copy.terms ?? copy.termsPending).split(/\n\s*\n/).map((paragraph) => <p>{paragraph}</p>)}</div>
+      <h3>Yang bisa Anda siapkan</h3><ul>{copy.preparation.map((item) => <li>{item}</li>)}</ul>
+      <a class="contact-alternative" href="/kontak">Konsultasi kebutuhan lainnya ↗</a>
+    </section>
+    <MessageForm partnership />
+  </div>
+</CatalogLayout>

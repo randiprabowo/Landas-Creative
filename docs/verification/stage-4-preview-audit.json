@@ -1,0 +1,116 @@
+{
+  "date": "2026-11-14",
+  "responses": [
+    {
+      "path": "/",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/layanan",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/properti",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/portofolio",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/tentang",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/kontak",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/kemitraan",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/privasi",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/_preview/interaksi",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "status": 200,
+      "h1": 1
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "status": 200,
+      "h1": 1
+    }
+  ],
+  "htmlChecks": [
+    {
+      "path": "/_preview/interaksi",
+      "checks": {
+        "fourCards": true,
+        "controlsHidden": true,
+        "formHidden": true,
+        "noContactNumber": true,
+        "disabledWhatsapp": true
+      }
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "checks": {
+        "threeGalleryImagesAndOneFloorPlan": true,
+        "threeThumbnails": true,
+        "portraitRatio": true,
+        "unconfirmedPriceHidden": true,
+        "contextLink": true
+      }
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "checks": {
+        "contextLink": true,
+        "priceHidden": true
+      }
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "checks": {
+        "contextLink": true,
+        "renderLabel": true
+      }
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "checks": {
+        "soldAlternative": true,
+        "noSurvey": true,
+        "noContactCta": true
+      }
+    }
+  ],
+  "issues": [],
+  "note": "HTTP and server-rendered HTML checks only; browser interactions not verified."
+}

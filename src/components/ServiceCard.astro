@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ServiceIcon from './ServiceIcon.astro';
+import { formatPrice } from '../utils/format';
+interface Props { data: CollectionEntry<'services'>['data']; href?: string; demo?: boolean; }
+const { data, href, demo = false } = Astro.props;
+const isDemo = import.meta.env.DEV && demo;
+const visible = data.publishStatus === 'published' || isDemo;
+---
+{visible && <article class="service-card">
+  {isDemo && <span class="demo-label">DEMO · Pratinjau desain</span>}
+  <ServiceIcon category={data.category} />
+  <h3>{data.title}</h3>
+  <p class="summary">{data.summary}</p>
+  {data.startingPrice !== undefined && data.priceConfirmed && <div class="price"><p>Mulai dari <strong>{formatPrice(data.startingPrice)}</strong>{data.priceUnit && `/${data.priceUnit}`}</p><small>{data.priceNote || 'Biaya akhir menyesuaikan ukuran, spesifikasi, kondisi lokasi, dan lingkup pekerjaan.'}</small></div>}
+  {href ? <a class="card-link" href={href}>Lihat Layanan <span aria-hidden="true">↗</span><span class="sr-only"> {data.title}</span></a> : <p class="card-pending">Rincian layanan sedang disiapkan.</p>}
+</article>}
+<style>
+  .service-card { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: var(--space-8); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
+  h3 { margin-block: var(--space-6) var(--space-3); }
+  .summary { color: var(--color-muted); margin-bottom: var(--space-6); }
+  .price { margin-bottom: var(--space-6); }
+  .price p { margin-bottom: var(--space-2); }
+  .price small { color: var(--color-muted); }
+  .card-link { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; margin-top: auto; font-weight: 600; }
+  .card-pending { margin-block: auto 0; padding-top: var(--space-4); color: var(--color-muted); font-size: var(--text-caption); }
+  .demo-label { margin-bottom: var(--space-4); color: var(--color-danger); font-size: var(--text-caption); font-weight: 700; }
+</style>

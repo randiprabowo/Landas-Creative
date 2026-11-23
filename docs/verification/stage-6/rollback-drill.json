@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-14T10:54:03.152Z",
+  "initialStatus": 200,
+  "changedStatus": 200,
+  "changedVersionDetected": true,
+  "detectedChanges": [
+    "Berubah: index.html",
+    "Tambahan: rollback-drill-only.html"
+  ],
+  "restoredDigest": "8143b9dcb9b03bd024a4860162f96e38c376e2abceaaf38d166807ed4f68c3db",
+  "expectedDigest": "8143b9dcb9b03bd024a4860162f96e38c376e2abceaaf38d166807ed4f68c3db",
+  "differences": [],
+  "routes": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/kontak",
+      "status": 200
+    },
+    {
+      "path": "/properti",
+      "status": 200
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200
+    },
+    {
+      "path": "/rollback-drill-only.html",
+      "status": 404
+    },
+    {
+      "path": "/_preview/interaksi",
+      "status": 404
+    },
+    {
+      "path": "/layanan/pembangunan-rumah",
+      "status": 404
+    }
+  ],
+  "passed": true,
+  "scope": "Latihan lokal pada salinan terisolasi, bukan rollback layanan hosting."
+}

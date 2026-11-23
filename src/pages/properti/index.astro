@@ -1,0 +1,11 @@
+---
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import PropertyCatalog from '../../components/PropertyCatalog.astro';
+import { pages } from '../../data/pages';
+import { getPublishedEntries } from '../../utils/content';
+const properties = await getPublishedEntries('properties');
+const copy = pages.properties;
+---
+<CatalogLayout label="Properti" {...copy}>
+  <PropertyCatalog entries={properties} />
+</CatalogLayout>

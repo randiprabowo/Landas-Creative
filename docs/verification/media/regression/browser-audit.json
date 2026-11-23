@@ -1,0 +1,587 @@
+{
+  "browser": "157.0.8103.79",
+  "date": "2026-11-22T14:45:03.359Z",
+  "responsive": [
+    {
+      "path": "/",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Landas Creative | Foundations & Growth"
+    },
+    {
+      "path": "/layanan",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Layanan | Landas Creative"
+    },
+    {
+      "path": "/properti",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Properti | Landas Creative"
+    },
+    {
+      "path": "/portofolio",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Portofolio | Landas Creative"
+    },
+    {
+      "path": "/tentang",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Tentang Kami | Landas Creative"
+    },
+    {
+      "path": "/kontak",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Kontak | Landas Creative"
+    },
+    {
+      "path": "/kemitraan",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Kemitraan | Landas Creative"
+    },
+    {
+      "path": "/privasi",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Privasi | Landas Creative"
+    },
+    {
+      "path": "/tidak-ditemukan",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "Halaman tidak ditemukan | Landas Creative"
+    },
+    {
+      "path": "/",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Landas Creative | Foundations & Growth"
+    },
+    {
+      "path": "/layanan",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Layanan | Landas Creative"
+    },
+    {
+      "path": "/properti",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Properti | Landas Creative"
+    },
+    {
+      "path": "/portofolio",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Portofolio | Landas Creative"
+    },
+    {
+      "path": "/tentang",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Tentang Kami | Landas Creative"
+    },
+    {
+      "path": "/kontak",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Kontak | Landas Creative"
+    },
+    {
+      "path": "/kemitraan",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Kemitraan | Landas Creative"
+    },
+    {
+      "path": "/privasi",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Privasi | Landas Creative"
+    },
+    {
+      "path": "/tidak-ditemukan",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "Halaman tidak ditemukan | Landas Creative"
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Landas Creative | Foundations & Growth"
+    },
+    {
+      "path": "/layanan",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Layanan | Landas Creative"
+    },
+    {
+      "path": "/properti",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Properti | Landas Creative"
+    },
+    {
+      "path": "/portofolio",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Portofolio | Landas Creative"
+    },
+    {
+      "path": "/tentang",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Tentang Kami | Landas Creative"
+    },
+    {
+      "path": "/kontak",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Kontak | Landas Creative"
+    },
+    {
+      "path": "/kemitraan",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Kemitraan | Landas Creative"
+    },
+    {
+      "path": "/privasi",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Privasi | Landas Creative"
+    },
+    {
+      "path": "/tidak-ditemukan",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "Halaman tidak ditemukan | Landas Creative"
+    },
+    {
+      "path": "/_preview/kartu",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "DEMO — Pratinjau kartu | Landas Creative"
+    },
+    {
+      "path": "/_preview/interaksi",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "DEMO — Interaksi | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "DEMO — Pembangunan Rumah | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "DEMO — Contoh susunan kartu properti | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "DEMO — Judul properti panjang untuk menguji susunan kartu di layar kecil | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "width": 360,
+      "client": 360,
+      "scroll": 360,
+      "h1": 1,
+      "title": "DEMO — Konsep arsitektur | Landas Creative"
+    },
+    {
+      "path": "/_preview/kartu",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "DEMO — Pratinjau kartu | Landas Creative"
+    },
+    {
+      "path": "/_preview/interaksi",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "DEMO — Interaksi | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "DEMO — Pembangunan Rumah | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "DEMO — Contoh susunan kartu properti | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "DEMO — Judul properti panjang untuk menguji susunan kartu di layar kecil | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "width": 768,
+      "client": 768,
+      "scroll": 768,
+      "h1": 1,
+      "title": "DEMO — Konsep arsitektur | Landas Creative"
+    },
+    {
+      "path": "/_preview/kartu",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "DEMO — Pratinjau kartu | Landas Creative"
+    },
+    {
+      "path": "/_preview/interaksi",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "DEMO — Interaksi | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "DEMO — Pembangunan Rumah | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "DEMO — Contoh susunan kartu properti | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "DEMO — Judul properti panjang untuk menguji susunan kartu di layar kecil | Landas Creative"
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "width": 1440,
+      "client": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "title": "DEMO — Konsep arsitektur | Landas Creative"
+    }
+  ],
+  "accessibility": [
+    {
+      "path": "/_preview/interaksi",
+      "state": "preview",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "state": "gallery-dialog",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/layanan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/properti",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/portofolio",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/tentang",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/kontak",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/kemitraan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/privasi",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/tidak-ditemukan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/layanan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/properti",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/portofolio",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/tentang",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/kontak",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/kemitraan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/privasi",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/tidak-ditemukan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/kartu",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/interaksi",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/kartu",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/interaksi",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "state": "initial",
+      "violations": [],
+      "incomplete": []
+    }
+  ],
+  "interactions": [
+    "search trim/case",
+    "AND and empty results",
+    "availability filter",
+    "inclusive range and missing-price exclusion",
+    "range/format errors",
+    "all sort orders, missing price last",
+    "reset restores all and default sort",
+    "form validation/preview, unconfirmed WhatsApp, no storage",
+    "gallery arrows/Home/End and broken-image fallback",
+    "gallery dialog Escape and focus return",
+    "portrait floor plan enlargement and close",
+    "property context, ID/URL, remove reference",
+    "sold property has alternatives only",
+    "service message context",
+    "project message context",
+    "partnership message",
+    "mobile filter collapse, visible active values, reset",
+    "mobile menu Escape/focus",
+    "keyboard skip link",
+    "no-JavaScript catalog/gallery/navigation, form does not submit",
+    "reflow simulation equivalent to 1440px at 200% (720 CSS px, DPR 2)",
+    "no form POST or other transmission"
+  ],
+  "errors": [],
+  "unexpectedTransmissions": [],
+  "passed": true
+}

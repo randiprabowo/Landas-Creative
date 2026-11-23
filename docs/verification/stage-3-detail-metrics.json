@@ -1,0 +1,110 @@
+[
+  {
+    "bookingLinks": 0,
+    "clientWidth": 345,
+    "h1": 1,
+    "path": "/_preview/detail/layanan",
+    "scrollWidth": 345,
+    "unconfirmedPriceVisible": false,
+    "viewport": 360
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 753,
+    "h1": 1,
+    "path": "/_preview/detail/layanan",
+    "scrollWidth": 753,
+    "unconfirmedPriceVisible": false,
+    "viewport": 768
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 1425,
+    "h1": 1,
+    "path": "/_preview/detail/layanan",
+    "scrollWidth": 1425,
+    "unconfirmedPriceVisible": false,
+    "viewport": 1440
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 345,
+    "h1": 1,
+    "path": "/_preview/detail/properti",
+    "scrollWidth": 345,
+    "unconfirmedPriceVisible": false,
+    "viewport": 360
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 753,
+    "h1": 1,
+    "path": "/_preview/detail/properti",
+    "scrollWidth": 753,
+    "unconfirmedPriceVisible": false,
+    "viewport": 768
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 1425,
+    "h1": 1,
+    "path": "/_preview/detail/properti",
+    "scrollWidth": 1425,
+    "unconfirmedPriceVisible": false,
+    "viewport": 1440
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 345,
+    "h1": 1,
+    "path": "/_preview/detail/properti-terjual",
+    "scrollWidth": 345,
+    "unconfirmedPriceVisible": false,
+    "viewport": 360
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 753,
+    "h1": 1,
+    "path": "/_preview/detail/properti-terjual",
+    "scrollWidth": 753,
+    "unconfirmedPriceVisible": false,
+    "viewport": 768
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 1425,
+    "h1": 1,
+    "path": "/_preview/detail/properti-terjual",
+    "scrollWidth": 1425,
+    "unconfirmedPriceVisible": false,
+    "viewport": 1440
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 345,
+    "h1": 1,
+    "path": "/_preview/detail/proyek",
+    "scrollWidth": 345,
+    "unconfirmedPriceVisible": false,
+    "viewport": 360
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 753,
+    "h1": 1,
+    "path": "/_preview/detail/proyek",
+    "scrollWidth": 753,
+    "unconfirmedPriceVisible": false,
+    "viewport": 768
+  },
+  {
+    "bookingLinks": 0,
+    "clientWidth": 1425,
+    "h1": 1,
+    "path": "/_preview/detail/proyek",
+    "scrollWidth": 1425,
+    "unconfirmedPriceVisible": false,
+    "viewport": 1440
+  }
+]

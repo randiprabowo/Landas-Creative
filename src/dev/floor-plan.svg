@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <rect width="600" height="800" fill="#F7F6ED"/>
+  <g fill="none" stroke="#192D3A" stroke-width="5"><rect x="80" y="120" width="440" height="560"/><path d="M80 360h440M300 120v240M80 520h240M320 360v320"/></g>
+  <g fill="#192D3A" font-family="system-ui,sans-serif" text-anchor="middle"><text x="300" y="65" font-size="25" font-weight="700">DEMO · Skema ruang buatan</text><text x="188" y="248" font-size="22">Area A</text><text x="410" y="248" font-size="22">Area B</text><text x="202" y="450" font-size="22">Area C</text><text x="202" y="610" font-size="22">Area D</text><text x="420" y="530" font-size="22">Area E</text><text x="300" y="745" font-size="18">Bukan denah properti yang ditawarkan</text></g>
+</svg>

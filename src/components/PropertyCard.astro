@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ContentImage from './ContentImage.astro';
+import { formatArea, formatPrice } from '../utils/format';
+import AvailabilityBadge from './AvailabilityBadge.astro';
+import { propertyTypeLabels } from '../data/labels';
+interface Props { data: CollectionEntry<'properties'>['data']; href?: string; demo?: boolean; }
+const { data, href, demo = false } = Astro.props;
+const isDemo = import.meta.env.DEV && demo;
+const visible = data.publishStatus === 'published' || isDemo;
+const cover = data.images[0]?.permissionConfirmed ? data.images[0] : undefined;
+---
+{visible && <article class="property-card">
+  <div class="property-media"><ContentImage src={cover?.src} alt={cover?.alt ?? data.title} kind={cover?.kind} photoLabel="Foto properti" />{isDemo && <span class="demo-badge">DEMO</span>}</div>
+  <div class="property-body">
+    <AvailabilityBadge status={data.availability} />
+    <p class="property-meta">{propertyTypeLabels[data.propertyType]} · {data.publicLocation}</p>
+    <h3>{href ? <a href={href}>{data.title}</a> : data.title}</h3>
+    <p class="property-price">{data.price !== undefined && data.priceConfirmed ? formatPrice(data.price) : 'Hubungi kami untuk informasi harga'}</p>
+    <dl class="property-specs"><div><dt>Tanah</dt><dd>{formatArea(data.landAreaM2)}</dd></div><div><dt>Bangunan</dt><dd>{formatArea(data.buildingAreaM2)}</dd></div>{data.bedrooms !== undefined && <div><dt>Kamar tidur</dt><dd>{data.bedrooms}</dd></div>}</dl>
+    {href ? <a class="card-link" href={href}>Lihat Detail <span aria-hidden="true">↗</span><span class="sr-only"> {data.title}</span></a> : <p class="card-pending">Rincian properti sedang disiapkan.</p>}
+  </div>
+</article>}
+<style>
+  .property-card { min-width: 0; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); }
+  .property-media { position: relative; }
+  .property-body { padding: var(--space-6); }
+  .property-meta { margin-block: var(--space-4) var(--space-2); color: var(--color-muted); font-size: var(--text-caption); }
+  h3 { margin-bottom: var(--space-3); }
+  h3 a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-ink); }
+  .property-price { font-weight: 600; }
+  .property-specs { display: flex; flex-wrap: wrap; gap: var(--space-4); padding-block: var(--space-4); margin-block: var(--space-4); border-block: 1px solid var(--color-border); font-size: var(--text-caption); }
+  dt { color: var(--color-muted); } dd { margin: 0; font-weight: 600; }
+  .card-link { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; font-weight: 600; }
+  .card-pending { margin-bottom: 0; color: var(--color-muted); font-size: var(--text-caption); }
+  .demo-badge { position: absolute; top: var(--space-4); left: var(--space-4); padding: var(--space-1) var(--space-3); background: var(--color-canvas); color: var(--color-danger); font-size: var(--text-caption); font-weight: 700; }
+</style>

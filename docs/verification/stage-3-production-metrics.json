@@ -1,0 +1,164 @@
+[
+  {
+    "clientWidth": 345,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/",
+    "scrollWidth": 345,
+    "title": "Landas Creative | Foundations & Growth",
+    "viewport": 360
+  },
+  {
+    "clientWidth": 753,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/",
+    "scrollWidth": 753,
+    "title": "Landas Creative | Foundations & Growth",
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1425,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/",
+    "scrollWidth": 1425,
+    "title": "Landas Creative | Foundations & Growth",
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 345,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/layanan",
+    "scrollWidth": 345,
+    "title": "Layanan | Landas Creative",
+    "viewport": 360
+  },
+  {
+    "clientWidth": 753,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/layanan",
+    "scrollWidth": 753,
+    "title": "Layanan | Landas Creative",
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1425,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/layanan",
+    "scrollWidth": 1425,
+    "title": "Layanan | Landas Creative",
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 345,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/properti",
+    "scrollWidth": 345,
+    "title": "Properti | Landas Creative",
+    "viewport": 360
+  },
+  {
+    "clientWidth": 753,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/properti",
+    "scrollWidth": 753,
+    "title": "Properti | Landas Creative",
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1425,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/properti",
+    "scrollWidth": 1425,
+    "title": "Properti | Landas Creative",
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 345,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/portofolio",
+    "scrollWidth": 345,
+    "title": "Portofolio | Landas Creative",
+    "viewport": 360
+  },
+  {
+    "clientWidth": 753,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/portofolio",
+    "scrollWidth": 753,
+    "title": "Portofolio | Landas Creative",
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1425,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/portofolio",
+    "scrollWidth": 1425,
+    "title": "Portofolio | Landas Creative",
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 345,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/tentang",
+    "scrollWidth": 345,
+    "title": "Tentang Kami | Landas Creative",
+    "viewport": 360
+  },
+  {
+    "clientWidth": 753,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/tentang",
+    "scrollWidth": 753,
+    "title": "Tentang Kami | Landas Creative",
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1425,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/tentang",
+    "scrollWidth": 1425,
+    "title": "Tentang Kami | Landas Creative",
+    "viewport": 1440
+  },
+  {
+    "clientWidth": 345,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/halaman-tidak-ditemukan",
+    "scrollWidth": 345,
+    "title": "Halaman tidak ditemukan | Landas Creative",
+    "viewport": 360
+  },
+  {
+    "clientWidth": 753,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/halaman-tidak-ditemukan",
+    "scrollWidth": 753,
+    "title": "Halaman tidak ditemukan | Landas Creative",
+    "viewport": 768
+  },
+  {
+    "clientWidth": 1425,
+    "demoVisible": false,
+    "h1Count": 1,
+    "path": "/halaman-tidak-ditemukan",
+    "scrollWidth": 1425,
+    "title": "Halaman tidak ditemukan | Landas Creative",
+    "viewport": 1440
+  }
+]

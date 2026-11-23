@@ -1,0 +1,99 @@
+---
+import illustration from '../assets/illustrations/architecture.svg';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Callout from '../components/Callout.astro';
+import ContentImage from '../components/ContentImage.astro';
+import SupplementalMedia from '../components/SupplementalMedia.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import PropertyCard from '../components/PropertyCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { home, heroImage } from '../data/home';
+import { catalogRoutes, detailHref } from '../data/navigation';
+import { getPublishedContent } from '../utils/content';
+
+const { services, properties: allProperties, projects: allProjects } = await getPublishedContent();
+const properties = allProperties.filter((entry) => entry.data.featured).slice(0, 3);
+const projects = allProjects.filter((entry) => entry.data.featured).slice(0, 3);
+---
+<BaseLayout hasFeaturedProperties={properties.length > 0} hasFeaturedProjects={projects.length > 0}>
+  <section class="hero section" aria-labelledby="hero-heading">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{home.hero.eyebrow}</p>
+        <h1 id="hero-heading">{home.hero.title} <span>{home.hero.accent}</span></h1>
+        <p class="hero-description">{home.hero.description}</p>
+        <div class="hero-actions"><a class="button" href="/kontak#pesan">{home.hero.primaryLabel} <span aria-hidden="true">↗</span></a><a class="button button--secondary" href={catalogRoutes.properties ?? '#properti'}>{home.hero.secondaryLabel}</a></div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image"><ContentImage src={heroImage ?? illustration} alt={heroImage ? home.hero.media.alt : 'Ilustrasi konseptual bangunan dalam perspektif arsitektur, bukan proyek Landas Creative'} kind={heroImage ? home.hero.media.kind : 'ilustrasi'} caption={heroImage ? home.hero.media.caption : 'Ilustrasi arsitektur · Bukan dokumentasi proyek.'} fit={heroImage ? 'cover' : 'contain'} priority /></div>
+        {(home.hero.video?.permissionConfirmed || home.hero.model?.permissionConfirmed) && <SupplementalMedia id="hero-media" video={home.hero.video} model={home.hero.model} />}
+      </div>
+    </div>
+  </section>
+
+  <section class="introduction section" id="tentang" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="intro-heading"><p class="eyebrow">{home.introduction.eyebrow}</p><div><h2 id="about-heading">{home.introduction.title}</h2><p class="muted">{home.introduction.description}</p></div></div>
+      <ul class="commitments">{home.introduction.commitments.map((item) => <li><span class="commitment-line" aria-hidden="true"></span><h3>{item.title}</h3><p>{item.description}</p></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="services section" id="layanan" aria-labelledby="services-heading">
+    <div class="container">
+      <SectionHeading id="services-heading" {...home.services} />
+      {services.length > 0 ? <div class="card-grid">{services.map(({ data }) => <ServiceCard data={data} href={detailHref('services', data.slug)} />)}</div> : <div class="service-empty"><div class="empty-icon" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 32V8h17l7 7v17zM25 8v8h7M14 22h12m-12 5h8"/></svg></div><div><h3>{home.services.emptyTitle}</h3><p>{home.services.emptyDescription}</p><a class="text-action" href="#cara-kerja">{home.services.emptyActionLabel} <span aria-hidden="true">↗</span></a></div></div>}
+    </div>
+  </section>
+
+  {properties.length > 0 && <section class="section featured-properties" id="properti" aria-labelledby="properties-heading"><div class="container"><SectionHeading id="properties-heading" {...home.properties} /><div class="card-grid">{properties.map(({ data }) => <PropertyCard data={data} href={detailHref('properties', data.slug)} />)}</div>{catalogRoutes.properties && <a class="button button--secondary section-action" href={catalogRoutes.properties}>Lihat Semua Properti <span aria-hidden="true">↗</span></a>}</div></section>}
+
+  {projects.length > 0 && <section class="section featured-projects" id="portofolio" aria-labelledby="projects-heading"><div class="container"><SectionHeading id="projects-heading" {...home.projects} /><div class="card-grid">{projects.map(({ data }) => <ProjectCard data={data} href={detailHref('projects', data.slug)} />)}</div>{catalogRoutes.projects && <a class="button button--secondary section-action" href={catalogRoutes.projects}>Lihat Semua Proyek <span aria-hidden="true">↗</span></a>}</div></section>}
+
+  <section class="workflow section" id="cara-kerja" aria-labelledby="workflow-heading"><div class="container"><SectionHeading id="workflow-heading" {...home.workflow} /><ProcessSteps steps={home.workflow.steps} /></div></section>
+  <Callout id="kemitraan" {...home.partnership} href="/kemitraan" />
+  <Callout id="rencana" {...home.closing} href="/kontak#pesan" tone="dark" />
+</BaseLayout>
+<style>
+  .hero { padding-block: var(--space-12) var(--space-16); }
+  .hero-grid { display: grid; align-items: center; gap: var(--space-8); }
+  .hero-copy, .hero-visual { min-width: 0; }
+  .hero-copy .eyebrow { margin-bottom: var(--space-6); }
+  h1 { margin-bottom: var(--space-6); }
+  h1 span { color: var(--color-brand); }
+  .hero-description { color: var(--color-muted); margin-bottom: var(--space-8); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .hero-image { overflow: hidden; border-radius: var(--radius-section) var(--radius-section) 0 0; }
+  .introduction { border-block: 1px solid var(--color-border); }
+  .intro-heading { display: grid; gap: var(--space-3); margin-bottom: var(--space-8); }
+  .intro-heading h2 { max-width: 26ch; margin-bottom: var(--space-4); }
+  .intro-heading p { margin-bottom: 0; }
+  .commitments { display: grid; gap: var(--space-8); list-style: none; padding: 0; margin: 0; }
+  .commitments li { min-width: 0; }
+  .commitment-line { display: block; width: var(--space-8); height: 2px; background: var(--color-brand); margin-bottom: var(--space-4); }
+  .commitments h3 { margin-bottom: var(--space-3); }
+  .commitments p { color: var(--color-muted); margin: 0; }
+  .services { background: var(--color-surface); }
+  .service-empty { display: grid; gap: var(--space-6); padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-canvas); }
+  .empty-icon { display: grid; place-items: center; width: 64px; height: 64px; background: var(--color-surface-soft); color: var(--color-brand); border-radius: var(--radius-control); }
+  .service-empty h3 { margin-bottom: var(--space-3); }
+  .service-empty p { max-width: 64ch; margin-bottom: var(--space-3); color: var(--color-muted); }
+  .text-action { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; font-weight: 600; }
+  .workflow { border-top: 1px solid var(--color-border); }
+  .featured-projects { background: var(--color-surface); }
+  .section-action { margin-top: var(--space-8); }
+  @media (min-width: 768px) {
+    .hero-description { font-size: var(--text-lead); }
+    .intro-heading { grid-template-columns: 1fr 2fr; gap: var(--space-8); }
+    .commitments { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
+    .service-empty { grid-template-columns: 64px minmax(0, 1fr); padding: var(--space-8); }
+  }
+  @media (min-width: 1024px) {
+    .hero { padding-block: var(--space-20); }
+    .hero-grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-12); }
+    .intro-heading { margin-bottom: var(--space-12); }
+    .commitments { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-16); }
+    .service-empty { padding: var(--space-12); gap: var(--space-8); }
+  }
+</style>

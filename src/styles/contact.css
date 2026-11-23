@@ -1,0 +1,14 @@
+.contact-grid { display: grid; gap: var(--space-8); align-items: start; }
+.contact-information { min-width: 0; }
+.contact-information h2 { max-width: 20ch; }
+.contact-information p, .contact-information li { color: var(--color-muted); }
+.contact-information h3 { margin-top: var(--space-8); font-size: 1.25rem; }
+.contact-information ul { padding-left: var(--space-6); }
+.contact-information li + li { margin-top: var(--space-3); }
+.contact-facts { margin-block: var(--space-8); }
+.contact-facts > div { padding-block: var(--space-4); border-top: 1px solid var(--color-border); }
+.contact-facts dt { font-size: var(--text-caption); color: var(--color-muted); }
+.contact-facts dd { margin: 0; }
+.contact-alternative { display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; }
+.partnership-terms { border-left: 3px solid var(--color-brand); padding-left: var(--space-4); }
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--space-12); } }

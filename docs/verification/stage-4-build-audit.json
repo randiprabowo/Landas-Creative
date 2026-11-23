@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-14",
+  "staticPages": 9,
+  "responses": [
+    {
+      "path": "/404",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/kemitraan",
+      "status": 200
+    },
+    {
+      "path": "/kontak",
+      "status": 200
+    },
+    {
+      "path": "/layanan",
+      "status": 200
+    },
+    {
+      "path": "/portofolio",
+      "status": 200
+    },
+    {
+      "path": "/privasi",
+      "status": 200
+    },
+    {
+      "path": "/properti",
+      "status": 200
+    },
+    {
+      "path": "/tentang",
+      "status": 200
+    }
+  ],
+  "hiddenResponses": [
+    {
+      "path": "/_preview/kartu",
+      "status": 404
+    },
+    {
+      "path": "/_preview/interaksi",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "status": 404
+    },
+    {
+      "path": "/layanan/pembangunan-rumah",
+      "status": 404
+    },
+    {
+      "path": "/layanan/desain-3d",
+      "status": 404
+    },
+    {
+      "path": "/layanan/sumur-bor",
+      "status": 404
+    },
+    {
+      "path": "/layanan/atap-spandek-baja-ringan",
+      "status": 404
+    },
+    {
+      "path": "/layanan/pemasaran-properti",
+      "status": 404
+    },
+    {
+      "path": "/properti/tidak-ada",
+      "status": 404
+    },
+    {
+      "path": "/portofolio/tidak-ada",
+      "status": 404
+    }
+  ],
+  "internalLinks": 166,
+  "assetsChecked": 9,
+  "leaks": [],
+  "formChecks": {
+    "/kontak": {
+      "hiddenUntilScript": true,
+      "disabledWhatsapp": true,
+      "noContactNumber": true,
+      "requiredFields": true,
+      "privacyLink": true,
+      "previewButton": true
+    },
+    "/kemitraan": {
+      "hiddenUntilScript": true,
+      "disabledWhatsapp": true,
+      "noContactNumber": true,
+      "requiredFields": true,
+      "privacyLink": true,
+      "previewButton": true
+    }
+  },
+  "sourceHashes": {
+    "docs/PRD_Landas_Creative.md": "C57091929956830B5068AD946C8106C2F07286447AAFC54FFA36055AB295B956",
+    "docs/DESIGN_Landas_Creative.md": "EED7BB4B8F83E059BD3F3F34C5690076F628A345A8D9B4FFCB11E895973730B5"
+  },
+  "issues": [],
+  "browserVerification": "Not completed: Computer Use stopped by user physical Escape. No Stage 4 screenshots or runtime viewport metrics.",
+  "finalBuildRechecked": true
+}

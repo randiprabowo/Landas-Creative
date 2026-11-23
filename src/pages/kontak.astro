@@ -1,0 +1,31 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import MessageForm from '../components/MessageForm.astro';
+import { contactCopy } from '../data/contact';
+import { site, verifiedWhatsappNumber } from '../data/site';
+import { getPublishedContent } from '../utils/content';
+import type { MessageContext } from '../utils/whatsapp';
+import '../styles/contact.css';
+const copy = contactCopy.contact;
+const content = await getPublishedContent();
+const contexts: MessageContext[] = [
+  ...content.services.map(({ id, data }) => ({ kind: 'service' as const, id, title: data.title, path: `/layanan/${data.slug}` })),
+  ...content.properties.map(({ id, data }) => ({ kind: 'property' as const, id, title: data.title, path: `/properti/${data.slug}`, availability: data.availability })),
+  ...content.projects.map(({ id, data }) => ({ kind: 'project' as const, id, title: data.title, path: `/portofolio/${data.slug}` })),
+];
+---
+<CatalogLayout label="Kontak" {...copy}>
+  <div class="contact-grid">
+    <section class="contact-information" aria-labelledby="contact-information-title"><p class="eyebrow">{site.brandName}</p><h2 id="contact-information-title">{copy.informationTitle}</h2><p>{copy.introduction}</p>
+      <dl class="contact-facts">
+        {verifiedWhatsappNumber && <div><dt>WhatsApp resmi</dt><dd>+{verifiedWhatsappNumber}</dd></div>}
+        {site.email && <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>}
+        {site.publicAddress && <div><dt>Alamat publik</dt><dd>{site.publicAddress}<br /><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.publicAddress)}`} target="_blank" rel="noopener noreferrer">Buka di Google Maps<span class="sr-only"> (tab baru)</span> ↗</a></dd></div>}
+        {site.serviceAreas.length > 0 && <div><dt>Area layanan</dt><dd>{site.serviceAreas.join(', ')}</dd></div>}
+      </dl>
+      {!site.publicAddress && site.serviceAreas.length === 0 && <p class="muted">{copy.areaEmpty}</p>}
+      <a class="contact-alternative" href="/kemitraan">Ingin membahas kemitraan? ↗</a>
+    </section>
+    <MessageForm contexts={contexts} />
+  </div>
+</CatalogLayout>

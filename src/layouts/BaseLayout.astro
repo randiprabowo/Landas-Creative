@@ -1,0 +1,54 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FloatingConsultation from '../components/FloatingConsultation.astro';
+import Seo from '../components/Seo.astro';
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import { site } from '../data/site';
+import { resolveAsset } from '../utils/assets';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  seoImage?: ImageMetadata;
+  seoImageAlt?: string;
+  hasFeaturedProperties?: boolean;
+  hasFeaturedProjects?: boolean;
+  consultationHref?: string;
+}
+
+const {
+  title = site.defaultSeo.title,
+  description = site.defaultSeo.description,
+  noindex = !site.indexingEnabled,
+  seoImage, seoImageAlt,
+  hasFeaturedProperties = false,
+  hasFeaturedProjects = false,
+  consultationHref = '/kontak#pesan',
+} = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '');
+const showConsultation = path !== '/kontak' && path !== '/kemitraan';
+const brandImage = resolveAsset(site.logo);
+const favicon = brandImage ? await getImage({ src: brandImage, width: 96, format: 'png' }) : undefined;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#226b60" />
+    {favicon && <link rel="icon" type="image/png" href={favicon.src} sizes={`${favicon.attributes.width}x${favicon.attributes.height}`} />}
+    <Seo {title} {description} {noindex} image={seoImage} imageAlt={seoImageAlt} />
+  </head>
+  <body>
+    <a class="skip-link button" href="#main-content">Lewati ke konten utama</a>
+    <Header />
+    <main id="main-content" tabindex="-1"><slot /></main>
+    {showConsultation && <FloatingConsultation href={consultationHref} />}
+    <Footer hasFeaturedProperties={hasFeaturedProperties} hasFeaturedProjects={hasFeaturedProjects} />
+  </body>
+</html>

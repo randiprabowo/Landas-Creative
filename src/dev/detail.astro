@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import DetailLayout from '../layouts/DetailLayout.astro';
+import ServiceDetail from '../components/details/ServiceDetail.astro';
+import PropertyDetail from '../components/details/PropertyDetail.astro';
+import ProjectDetail from '../components/details/ProjectDetail.astro';
+import { Content as DemoServiceBody } from './service-copy.md';
+import { demoServiceEntry, demoPropertyEntry, demoSoldEntry, demoProjectEntry } from './detail-fixtures';
+type Props = { kind: 'service'; entry: CollectionEntry<'services'> } | { kind: 'property'; entry: CollectionEntry<'properties'> } | { kind: 'project'; entry: CollectionEntry<'projects'> };
+export const getStaticPaths = (() => {
+  if (!import.meta.env.DEV) return [];
+  return [
+    { params: { jenis: 'layanan' }, props: { kind: 'service', entry: demoServiceEntry } },
+    { params: { jenis: 'properti' }, props: { kind: 'property', entry: demoPropertyEntry } },
+    { params: { jenis: 'properti-terjual' }, props: { kind: 'property', entry: demoSoldEntry } },
+    { params: { jenis: 'proyek' }, props: { kind: 'project', entry: demoProjectEntry } },
+  ];
+}) satisfies GetStaticPaths;
+const props: Props = Astro.props;
+---
+<DetailLayout title={props.entry.data.title} description={props.entry.data.summary} eyebrow="DEMO · Template detail" breadcrumbs={[{ label: 'Beranda', href: '/' }, { label: 'Pratinjau DEMO', href: '/_preview/kartu' }, { label: props.entry.data.title }]} demo>
+  {props.kind === 'service' && <ServiceDetail entry={props.entry} demo><DemoServiceBody /></ServiceDetail>}
+  {props.kind === 'property' && <PropertyDetail entry={props.entry} demo />}
+  {props.kind === 'project' && <ProjectDetail entry={props.entry} demo />}
+</DetailLayout>

@@ -1,0 +1,12 @@
+{
+  "id": "2026-11-14T10-52-05-929Z-8143b9dcb9",
+  "localDirectory": ".releases/2026-11-14T10-52-05-929Z-8143b9dcb9",
+  "purpose": "local-review-only",
+  "deploymentApproved": false,
+  "fileCount": 22,
+  "totalBytes": 212949,
+  "buildDigest": "8143b9dcb9b03bd024a4860162f96e38c376e2abceaaf38d166807ed4f68c3db",
+  "sourceDigest": "6b5d2fe04f59a5838e4aafaab4f3423ea4df02bc9033e9504b01bd19b1e94671",
+  "verified": true,
+  "readinessStatus": "not-ready"
+}

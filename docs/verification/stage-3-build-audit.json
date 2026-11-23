@@ -1,0 +1,128 @@
+{
+  "htmlPages": [
+    "/404",
+    "/",
+    "/layanan",
+    "/portofolio",
+    "/properti",
+    "/tentang"
+  ],
+  "linkCount": 104,
+  "linkErrors": [],
+  "leaks": [],
+  "statuses": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/layanan",
+      "status": 200
+    },
+    {
+      "path": "/properti",
+      "status": 200
+    },
+    {
+      "path": "/portofolio",
+      "status": 200
+    },
+    {
+      "path": "/tentang",
+      "status": 200
+    }
+  ],
+  "hiddenStatuses": [
+    {
+      "path": "/layanan/atap-spandek-baja-ringan",
+      "status": 404
+    },
+    {
+      "path": "/layanan/desain-3d",
+      "status": 404
+    },
+    {
+      "path": "/layanan/pemasaran-properti",
+      "status": 404
+    },
+    {
+      "path": "/layanan/pembangunan-rumah",
+      "status": 404
+    },
+    {
+      "path": "/layanan/sumur-bor",
+      "status": 404
+    },
+    {
+      "path": "/properti/tidak-ada",
+      "status": 404
+    },
+    {
+      "path": "/portofolio/tidak-ada",
+      "status": 404
+    },
+    {
+      "path": "/_preview/kartu",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "status": 404
+    }
+  ],
+  "assetStatuses": [
+    {
+      "path": "/_astro/BaseLayout.DAvehexN.css",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_ZnwlYz.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_2k8oB0.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_ZKYlXR.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_1vJXoS.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/index.WVnIFic6.css",
+      "status": 200
+    },
+    {
+      "path": "/_astro/architecture.BBflvIBA_Z1YGs10.svg",
+      "status": 200
+    },
+    {
+      "path": "/_astro/architecture.BBflvIBA_1Vpt3x.svg",
+      "status": 200
+    },
+    {
+      "path": "/_astro/architecture.BBflvIBA_Z2am314.svg",
+      "status": 200
+    }
+  ],
+  "unchangedDocuments": true,
+  "allServicesDraft": true,
+  "propertyCount": 0,
+  "projectCount": 0,
+  "whatsappConfirmed": false
+}

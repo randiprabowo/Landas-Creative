@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "fieldsOn": [
+    "hero",
+    "services",
+    "properties"
+  ],
+  "savedVideo": true,
+  "savedGlb": true,
+  "approvedByDefault": false
+}

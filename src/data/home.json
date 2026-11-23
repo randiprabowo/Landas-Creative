@@ -1,0 +1,62 @@
+{
+  "hero": {
+    "eyebrow": "Konstruksi · Properti · Infrastruktur Air",
+    "title": "Merencanakan dengan jelas.",
+    "accent": "Membangun dengan terarah.",
+    "description": "Landas Creative membantu kebutuhan pembangunan rumah, desain 3D, sumur bor, baja ringan, dan pemasaran properti melalui proses yang terencana.",
+    "primaryLabel": "Konsultasikan Kebutuhan",
+    "secondaryLabel": "Jelajahi Properti",
+    "media": { "src": null, "alt": "", "caption": "", "kind": "foto-proyek", "permissionConfirmed": false }
+  },
+  "introduction": {
+    "eyebrow": "Landas Creative",
+    "title": "Landasan yang jelas untuk setiap rencana.",
+    "description": "Dari merencanakan ruang hingga mewujudkan kebutuhan pembangunan dan properti, setiap langkah dimulai dengan memahami kebutuhan Anda.",
+    "commitments": [
+      { "title": "Perencanaan jelas", "description": "Menyamakan kebutuhan dan arah pekerjaan sejak awal." },
+      { "title": "Lingkup transparan", "description": "Membahas cakupan, spesifikasi, dan batas pekerjaan bersama." },
+      { "title": "Komunikasi progres", "description": "Menjaga komunikasi tentang perkembangan dan langkah berikutnya." }
+    ]
+  },
+  "services": {
+    "eyebrow": "Layanan",
+    "title": "Mulai dari kebutuhan Anda.",
+    "description": "Kenali lingkup pekerjaan sebelum menentukan langkah berikutnya.",
+    "emptyTitle": "Rincian layanan sedang disiapkan.",
+    "emptyDescription": "Informasi lingkup pekerjaan dan proses tiap layanan akan ditampilkan setelah siap. Sambil menunggu, kenali alur kerja untuk menyiapkan kebutuhan Anda.",
+    "emptyActionLabel": "Lihat Cara Kerja"
+  },
+  "properties": { "eyebrow": "Pilihan properti", "title": "Temukan ruang untuk rencana Anda.", "description": "Pilihan properti dengan informasi lokasi, spesifikasi, dan status yang jelas." },
+  "projects": { "eyebrow": "Portofolio", "title": "Dari perencanaan ke pelaksanaan.", "description": "Kenali lingkup dan dokumentasi pekerjaan yang telah siap dibagikan." },
+  "workflow": {
+    "eyebrow": "Cara kerja",
+    "title": "Langkah terarah, dari awal hingga akhir.",
+    "description": "Berawal dari percakapan tentang kebutuhan Anda. Alur menyesuaikan lingkup pekerjaan dan kondisi lokasi.",
+    "steps": [
+      { "title": "Konsultasi", "description": "Ceritakan kebutuhan, lokasi, dan gambaran rencana Anda." },
+      { "title": "Survei", "description": "Tinjau kondisi lokasi dan kebutuhan teknis yang relevan." },
+      { "title": "Rencana & penawaran", "description": "Bahas lingkup, spesifikasi, serta penawaran pekerjaan." },
+      { "title": "Pelaksanaan", "description": "Pekerjaan mengikuti lingkup dan rencana yang disepakati." },
+      { "title": "Serah terima", "description": "Tinjau hasil pekerjaan sesuai lingkup yang disepakati." }
+    ]
+  },
+  "partnership": {
+    "eyebrow": "Kemitraan",
+    "title": "Buka ruang untuk tumbuh bersama.",
+    "description": "Tertarik bergabung sebagai agen pemasaran? Kenali peluang kemitraan bersama Landas Creative.",
+    "notice": "Informasi alur bergabung dan ketentuan kemitraan sedang disiapkan.",
+    "actionLabel": "Kenali Kemitraan"
+  },
+  "closing": {
+    "eyebrow": "Mari merencanakan",
+    "title": "Punya rencana pembangunan atau sedang mencari properti?",
+    "description": "Mulai dengan mencatat kebutuhan, lokasi, dan gambaran lingkup pekerjaan. Kenali prosesnya agar langkah berikutnya lebih terarah.",
+    "actionLabel": "Siapkan Konsultasi"
+  },
+  "availability": {
+    "contact": "Kontak resmi dan area layanan sedang disiapkan.",
+    "properties": "Informasi properti sedang disiapkan. Pilihan akan ditampilkan setelah datanya tersedia.",
+    "projects": "Dokumentasi proyek akan ditambahkan setelah siap dipublikasikan."
+  },
+  "footer": { "description": "Perencanaan, pembangunan, dan properti melalui proses yang terarah." }
+}

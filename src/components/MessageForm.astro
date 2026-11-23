@@ -1,0 +1,103 @@
+---
+import { verifiedWhatsappNumber } from '../data/site';
+import { categoryLabels } from '../data/labels';
+import { contactCopy } from '../data/contact';
+import type { MessageContext } from '../utils/whatsapp';
+import '../styles/forms.css';
+interface Props { partnership?: boolean; contexts?: MessageContext[]; }
+const { partnership = false, contexts = [] } = Astro.props;
+const copy = contactCopy.form;
+---
+<section class="message-section" id="pesan" aria-labelledby="message-title" data-message-composer data-whatsapp-number={verifiedWhatsappNumber ?? undefined} data-partnership={String(partnership)}>
+  <h2 id="message-title">{partnership ? contactCopy.partnership.formTitle : contactCopy.contact.formTitle}</h2>
+  {!verifiedWhatsappNumber && <p class="contact-pending">{contactCopy.contact.pendingNotice}</p>}
+  <noscript><p>Aktifkan JavaScript untuk menyusun pesan di browser. Formulir ini tidak mengirim isian ke server.</p></noscript>
+  <form class="message-form form-grid form-grid--two" data-message-form hidden novalidate>
+    <div class="field"><label for="message-name">Nama <span aria-hidden="true">*</span></label><input id="message-name" name="name" autocomplete="name" required maxlength="80" aria-describedby="message-name-error" /><p id="message-name-error" class="field-error" data-field-error="name" hidden></p></div>
+    <div class="field"><label for="message-interest">Layanan / minat <span aria-hidden="true">*</span></label><select id="message-interest" name="interest" required aria-describedby="message-interest-error">
+      {partnership ? <option value="Kemitraan agen pemasaran">Kemitraan agen pemasaran</option> : <><option value="">Pilih minat Anda</option>{Object.values(categoryLabels).map((label) => <option value={label}>{label}</option>)}<option value="Mencari properti">Mencari properti</option><option value="Konsultasi umum">Konsultasi umum</option></>}
+    </select><p id="message-interest-error" class="field-error" data-field-error="interest" hidden></p></div>
+    <div class="field field--wide"><label for="message-location">Lokasi / wilayah <span aria-hidden="true">*</span></label><input id="message-location" name="location" autocomplete="address-level2" required maxlength="160" placeholder="Cukup wilayah atau lokasi umum" aria-describedby="message-location-error" /><p id="message-location-error" class="field-error" data-field-error="location" hidden></p></div>
+    <div class="message-context field--wide" data-message-context hidden><p>Referensi: <strong data-message-context-title></strong></p><button type="button" class="button button--secondary" data-message-context-clear>Hapus Referensi</button></div>
+    <div class="field field--wide"><label for="message-body">{partnership ? 'Perkenalan dan pertanyaan' : 'Kebutuhan / pesan'} <span aria-hidden="true">*</span></label><textarea id="message-body" name="message" rows="5" required maxlength="1200" aria-describedby="message-body-help message-message-error"></textarea><p id="message-body-help" class="field-help">Maksimal 1.200 karakter. Tidak perlu menyertakan nomor identitas atau dokumen pribadi.</p><p id="message-message-error" class="field-error" data-field-error="message" hidden></p></div>
+    <div class="field--wide">
+      <p class="field-help">Semua field bertanda * wajib diisi.</p>
+      <p class="field-help">{copy.privacyNotice} <a href="/privasi">Baca privasi</a>.</p>
+      <p class="field-help" id="message-handoff">{copy.handoffNotice}</p>
+    </div>
+    <div class="form-actions field--wide"><button class="button button--secondary" type="button" data-message-preview>{copy.previewLabel}</button><button class="button" type="submit" disabled={!verifiedWhatsappNumber} aria-describedby="message-handoff message-status">{copy.submitLabel} <span aria-hidden="true">↗</span></button></div>
+    <p id="message-status" class="field-help field--wide" data-message-status role="status" aria-live="polite">{verifiedWhatsappNumber ? 'Anda akan berpindah ke layanan WhatsApp.' : 'Lanjut ke WhatsApp belum tersedia. Gunakan Pratinjau Pesan untuk meninjau isian Anda.'}</p>
+    <div class="message-preview field--wide" data-message-output hidden><h3>Pratinjau pesan</h3><p class="field-help">Pesan ini belum dikirim.</p><pre data-message-text></pre></div>
+  </form>
+  {contexts.length > 0 && <div hidden data-message-contexts>{contexts.map((context) => <span data-kind={context.kind} data-title={context.title} data-id={context.id} data-path={context.path} data-availability={context.availability}></span>)}</div>}
+</section>
+<script>
+  import { buildWhatsappUrl, composeMessage, type MessageContext, type MessageFields } from '../utils/whatsapp';
+  document.querySelectorAll<HTMLElement>('[data-message-composer]').forEach((root) => {
+    const form = root.querySelector<HTMLFormElement>('[data-message-form]')!;
+    const status = root.querySelector<HTMLElement>('[data-message-status]')!;
+    const output = root.querySelector<HTMLElement>('[data-message-output]')!;
+    const text = root.querySelector<HTMLElement>('[data-message-text]')!;
+    const partnership = root.dataset.partnership === 'true';
+    const fields = ['name', 'interest', 'location', 'message'] as const;
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    const contexts = [...root.querySelectorAll<HTMLElement>('[data-message-contexts] span')].map(({ dataset: d }) => ({ kind: d.kind!, title: d.title!, id: d.id!, path: d.path!, availability: d.availability } as MessageContext));
+    const query = new URLSearchParams(window.location.search);
+    const queryKeys = { service: 'layanan', property: 'properti', project: 'proyek' };
+    let context = partnership ? undefined : contexts.find((entry) => query.get(queryKeys[entry.kind]) === entry.path.split('/').pop());
+    function syncContext() {
+      root.querySelector<HTMLElement>('[data-message-context]')!.hidden = !context;
+      root.querySelector<HTMLElement>('[data-message-context-title]')!.textContent = context ? `${context.title}${context.kind === 'property' ? ` · ID ${context.id}` : ''}` : '';
+      field('interest').disabled = Boolean(context);
+    }
+    if (context) field('interest').value = context.kind === 'property' ? 'Mencari properti' : context.kind === 'service' && [...(field('interest') as HTMLSelectElement).options].some((o) => o.value === context!.title) ? context.title : 'Konsultasi umum';
+    syncContext();
+    root.querySelector('[data-message-context-clear]')?.addEventListener('click', () => { context = undefined; syncContext(); output.hidden = true; field('interest').focus(); });
+    function validate() {
+      let first: HTMLElement | undefined;
+      fields.forEach((name) => {
+        const control = field(name);
+        const error = root.querySelector<HTMLElement>(`[data-field-error="${name}"]`)!;
+        const invalid = !control.value.trim() || !control.validity.valid;
+        error.textContent = invalid ? (name === 'interest' ? 'Pilih layanan atau minat Anda.' : name === 'name' ? 'Isi nama Anda (maksimal 80 karakter).' : name === 'location' ? 'Isi lokasi atau wilayah (maksimal 160 karakter).' : 'Isi kebutuhan atau pesan (maksimal 1.200 karakter).') : '';
+        error.hidden = !invalid;
+        control.setAttribute('aria-invalid', String(invalid));
+        if (invalid && !first) first = control;
+      });
+      if (first) { first.focus(); status.textContent = 'Periksa kembali field yang perlu dilengkapi.'; return false; }
+      return true;
+    }
+    function message() {
+      const values = Object.fromEntries(fields.map((name) => [name, field(name).value])) as unknown as MessageFields;
+      const itemUrl = context ? new URL(context.path, window.location.origin).href : undefined;
+      return composeMessage(values, context, itemUrl, partnership);
+    }
+    function preview() {
+      if (!validate()) return;
+      text.textContent = message(); output.hidden = false;
+      status.textContent = 'Pratinjau siap. Pesan belum dikirim.';
+    }
+    root.querySelector('[data-message-preview]')?.addEventListener('click', preview);
+    form.addEventListener('input', () => { output.hidden = true; text.textContent = ''; status.textContent = 'Isian berubah. Tinjau kembali pesan sebelum melanjutkan.'; });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!validate()) return;
+      const url = buildWhatsappUrl(root.dataset.whatsappNumber ?? null, message());
+      if (!url) { preview(); status.textContent = 'Kanal WhatsApp belum tersedia. Pesan hanya ditampilkan sebagai pratinjau.'; return; }
+      window.location.assign(url);
+    });
+    // Kontrol hanya diaktifkan setelah pencegah submit HTTP terpasang.
+    form.hidden = false;
+  });
+</script>
+<style>
+  .message-section { min-width: 0; padding: var(--space-6); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); }
+  .message-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  .contact-pending { padding: var(--space-4); border-left: 3px solid var(--color-brand); background: var(--color-surface-soft); font-size: var(--text-caption); }
+  .message-context { padding: var(--space-4); background: var(--color-surface-soft); border-radius: var(--radius-control); }
+  .message-context p { margin-bottom: var(--space-2); }
+  .message-preview { padding: var(--space-4); border: 1px solid var(--color-border); background: var(--color-canvas); border-radius: var(--radius-control); min-width: 0; }
+  .message-preview h3 { font-size: 1.125rem; }
+  .message-preview pre { margin: var(--space-4) 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: var(--text-caption); }
+  @media (min-width: 768px) { .message-section { padding: var(--space-8); } }
+</style>

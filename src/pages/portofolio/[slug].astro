@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import ProjectDetail from '../../components/details/ProjectDetail.astro';
+import { categoryLabels } from '../../data/labels';
+import { getPublishedContent } from '../../utils/content';
+export const getStaticPaths = (async () => {
+  const { projects, services } = await getPublishedContent();
+  return projects.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry, relatedServices: services.filter((service) => entry.data.relatedServiceIds.some((ref) => ref.id === service.id)).slice(0, 3) },
+  }));
+}) satisfies GetStaticPaths;
+interface Props { entry: CollectionEntry<'projects'>; relatedServices: CollectionEntry<'services'>[]; }
+const { entry, relatedServices } = Astro.props;
+const seoCover = entry.data.images.find((image) => image.permissionConfirmed);
+---
+<DetailLayout seoImage={seoCover?.src} seoImageAlt={seoCover?.alt} title={entry.data.title} description={entry.data.summary} eyebrow={categoryLabels[entry.data.category]} subtitle={entry.data.publicLocation} breadcrumbs={[{ label: 'Beranda', href: '/' }, { label: 'Portofolio', href: '/portofolio' }, { label: entry.data.title }]}>
+  <ProjectDetail entry={entry} relatedServices={relatedServices} />
+</DetailLayout>

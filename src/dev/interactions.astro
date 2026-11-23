@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PropertyCatalog from '../components/PropertyCatalog.astro';
+import MessageForm from '../components/MessageForm.astro';
+import { searchFixtures } from './search-fixtures';
+import { demoPropertyEntry, demoServiceEntry, demoProjectEntry } from './detail-fixtures';
+import type { MessageContext } from '../utils/whatsapp';
+const contexts: MessageContext[] = [
+  { kind: 'property', title: demoPropertyEntry.data.title, id: demoPropertyEntry.id, path: '/_preview/detail/properti', availability: 'tersedia' },
+  { kind: 'service', title: demoServiceEntry.data.title, id: demoServiceEntry.id, path: '/_preview/detail/layanan' },
+  { kind: 'project', title: demoProjectEntry.data.title, id: demoProjectEntry.id, path: '/_preview/detail/proyek' },
+];
+---
+<BaseLayout title="DEMO — Interaksi | Landas Creative" noindex>
+  <div class="container section">
+    <header class="preview-banner"><p class="eyebrow">DEMO · Development preview</p><h1>Pratinjau pencarian dan pesan</h1><p>Seluruh listing, harga, wilayah, dan referensi di sini adalah data sintetis. Bukan penawaran. Tidak ikut build produksi. WhatsApp tetap tidak aktif.</p><a href="/_preview/kartu">Kembali ke pratinjau kartu</a></header>
+    <section class="preview-section" aria-labelledby="preview-catalog-title"><h2 id="preview-catalog-title">Filter dan pengurutan · DEMO</h2><PropertyCatalog entries={searchFixtures} demo /></section>
+    <div class="preview-section"><MessageForm contexts={contexts} /></div>
+  </div>
+</BaseLayout>
+<style>.preview-banner { padding: var(--space-6); border: 1px solid var(--color-control-border); border-radius: var(--radius-card); background: var(--color-surface-soft); } h1 { font-size: var(--text-h2); } .preview-section { margin-top: var(--space-12); }</style>

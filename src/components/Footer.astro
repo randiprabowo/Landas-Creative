@@ -1,0 +1,61 @@
+---
+import ContentImage from './ContentImage.astro';
+import { catalogRoutes, mainNavigation } from '../data/navigation';
+import { site, verifiedWhatsappNumber } from '../data/site';
+import { home } from '../data/home';
+import { resolveAsset } from '../utils/assets';
+interface Props { hasFeaturedProperties?: boolean; hasFeaturedProjects?: boolean; }
+const { hasFeaturedProperties = false, hasFeaturedProjects = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><ContentImage src={resolveAsset(site.logo)} alt="Logo LNDS, Foundations & Growth" ratio="11 / 6" fit="contain" showKind={false} sizes="(min-width: 768px) 160px, 112px" /></div>
+      <div><a class="company-name" href="/">{site.brandName}</a><p>{home.footer.description}</p></div>
+    </div>
+    <nav class="footer-navigation" aria-label="Navigasi footer">
+      <h2>Jelajahi</h2>
+      <ul>{mainNavigation.slice(1).map((item) => <li><a href={item.href}>{item.label}</a></li>)}<li><a href="/kemitraan">Kemitraan</a></li><li><a href="/kontak">Kontak</a></li><li><a href="/privasi">Privasi</a></li></ul>
+    </nav>
+    <div class="footer-information">
+      <section id="kontak" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Mari terhubung</h2>
+        {!verifiedWhatsappNumber && !site.email && !site.publicAddress && !site.serviceAreas.length && !site.socialLinks.length && <p>{home.availability.contact}</p>}
+        {verifiedWhatsappNumber && <p><a href="/kontak#pesan">WhatsApp +{verifiedWhatsappNumber}</a></p>}
+        {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
+        {site.publicAddress && <p>{site.publicAddress}</p>}
+        {site.serviceAreas.length > 0 && <p>Area layanan: {site.serviceAreas.join(', ')}.</p>}
+        {site.socialLinks.length > 0 && <ul class="social-links">{site.socialLinks.map((link) => <li><a href={link.url} rel="noopener noreferrer" target="_blank">{link.label}<span class="sr-only"> (tab baru)</span></a></li>)}</ul>}
+      </section>
+      {!hasFeaturedProperties && !catalogRoutes.properties && <section id="properti" class="catalog-notice" aria-labelledby="property-notice-heading"><h3 id="property-notice-heading">Informasi properti</h3><p>{home.availability.properties}</p></section>}
+      {!hasFeaturedProjects && !catalogRoutes.projects && <section id="portofolio" class="catalog-notice" aria-labelledby="project-notice-heading"><h3 id="project-notice-heading">Dokumentasi proyek</h3><p>{home.availability.projects}</p></section>}
+    </div>
+  </div>
+  <div class="container footer-bottom"><small>© {year} {site.brandName}.</small><p>{site.tagline}</p></div>
+</footer>
+<style>
+  .site-footer { padding-block: var(--space-12) var(--space-6); border-top: 1px solid rgb(247 246 237 / 20%); background: var(--color-ink); color: var(--color-canvas); --color-focus: var(--color-canvas); }
+  .footer-grid { display: grid; gap: var(--space-6); align-items: start; }
+  .footer-grid > * { min-width: 0; }
+  .site-footer a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-canvas); text-decoration: none; }
+  .site-footer a:hover { color: var(--color-surface); text-decoration: underline; }
+  .site-footer h2, .site-footer h3 { font-size: var(--text-body); margin-bottom: var(--space-3); font-weight: 600; }
+  .site-footer p { font-size: var(--text-caption); }
+  .footer-brand { display: grid; grid-template-columns: minmax(0, 7rem) minmax(0, 1fr); align-items: center; gap: var(--space-4); }
+  .footer-logo { width: 100%; max-width: 10rem; overflow: hidden; border-radius: var(--radius-control); }
+  .company-name { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.03em; }
+  .footer-brand p, .footer-information p { max-width: 34ch; margin: 0; }
+  .footer-brand p, .footer-information p, .footer-bottom { color: #d5deda; }
+  .footer-navigation ul, .social-links { list-style: none; margin: 0; padding: 0; }
+  .footer-navigation ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-4); }
+  .footer-navigation, .footer-information { border-top: 1px solid rgb(247 246 237 / 20%); padding-top: var(--space-6); }
+  .catalog-notice { margin-top: var(--space-6); }
+  .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-3); margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid rgb(247 246 237 / 25%); }
+  .footer-bottom small, .footer-bottom p { font-size: var(--text-caption); margin: 0; }
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1.1fr 1fr; gap: clamp(2rem, 4vw, 4rem); }
+    .footer-brand { display: grid; grid-template-columns: 1fr; gap: var(--space-2); }
+    .footer-navigation, .footer-information { border: 0; padding: 0; }
+  }
+</style>

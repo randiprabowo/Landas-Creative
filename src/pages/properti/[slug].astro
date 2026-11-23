@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import PropertyDetail from '../../components/details/PropertyDetail.astro';
+import { propertyTypeLabels } from '../../data/labels';
+import { getPublishedEntries } from '../../utils/content';
+import { consultationLink } from '../../utils/whatsapp';
+export const getStaticPaths = (async () => {
+  const properties = await getPublishedEntries('properties');
+  return properties.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry, relatedProperties: properties.filter((property) => property.id !== entry.id && property.data.availability !== 'terjual' && property.data.propertyType === entry.data.propertyType).slice(0, 3) },
+  }));
+}) satisfies GetStaticPaths;
+interface Props { entry: CollectionEntry<'properties'>; relatedProperties: CollectionEntry<'properties'>[]; }
+const { entry, relatedProperties } = Astro.props;
+const seoCover = entry.data.images.find((image) => image.permissionConfirmed);
+---
+<DetailLayout consultationHref={consultationLink('properti', entry.data.slug)} seoImage={seoCover?.src} seoImageAlt={seoCover?.alt} title={entry.data.title} description={entry.data.summary} eyebrow={propertyTypeLabels[entry.data.propertyType]} subtitle={entry.data.publicLocation} breadcrumbs={[{ label: 'Beranda', href: '/' }, { label: 'Properti', href: '/properti' }, { label: entry.data.title }]}>
+  <PropertyDetail entry={entry} relatedProperties={relatedProperties} />
+</DetailLayout>

@@ -1,0 +1,14 @@
+---
+type Category = 'pembangunan-rumah' | 'desain-3d' | 'sumur-bor' | 'atap-spandek-baja-ringan' | 'pemasaran-properti';
+interface Props { category: Category; }
+const { category } = Astro.props;
+const paths: Record<Category, string[]> = {
+  'pembangunan-rumah': ['m4 15 12-10 12 10', 'M7 13v14h18V13M13 27v-9h6v9'],
+  'desain-3d': ['m16 3 12 7v13l-12 7-12-7V10z', 'm4 10 12 7 12-7M16 17v13M10 6l12 7'],
+  'sumur-bor': ['M8 4h15v5H8zM15 9v10m5-10v10M5 23h22M8 23v5m16-5v5', 'M17 14c-2 3-5 6-5 9a5 5 0 0 0 10 0c0-3-3-6-5-9z'],
+  'atap-spandek-baja-ringan': ['m3 16 13-11 13 11M6 16h20M8 16v11m16-11v11M8 27h16', 'm9 16 7-6 7 6M8 22h16'],
+  'pemasaran-properti': ['M5 28V8h17v20M10 12h2m4 0h2m-8 5h2m4 0h2M11 28v-6h5v6', 'M22 17h5v11H3'],
+};
+---
+<span class="service-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">{paths[category].map((d) => <path d={d} />)}</svg></span>
+<style>.service-icon { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: var(--radius-control); background: var(--color-surface-soft); color: var(--color-brand); }</style>

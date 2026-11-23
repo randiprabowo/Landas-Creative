@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-14T10:49:40.656Z",
+  "status": "not-ready",
+  "automaticChecksOnly": true,
+  "pending": [
+    "Domain resmi belum diisi.",
+    "Indexing masih nonaktif; persetujuan dan QA domain resmi diperlukan.",
+    "Kanal WhatsApp resmi belum dikonfirmasi/diaktifkan.",
+    "Area layanan resmi belum tersedia.",
+    "Konten layanan pembangunan-rumah belum published sesuai persetujuan pemilik.",
+    "Konten layanan desain-3d belum published sesuai persetujuan pemilik.",
+    "Konten layanan sumur-bor belum published sesuai persetujuan pemilik.",
+    "Konten layanan atap-spandek-baja-ringan belum published sesuai persetujuan pemilik.",
+    "Konten layanan pemasaran-properti belum published sesuai persetujuan pemilik.",
+    "Ketentuan kemitraan resmi belum diisi."
+  ],
+  "content": {
+    "servicesPublished": 0,
+    "propertiesPublished": 0,
+    "projectsPublished": 0
+  },
+  "notes": [
+    "Katalog properti/proyek kosong diperbolehkan dengan empty state; bukan penghalang otomatis.",
+    "Laporan ini tidak menyetujui konten, biaya, hosting, indexing, atau publikasi.",
+    "Pemeriksaan manual dan instruksi pemilik mengikuti docs/RELEASE_CHECKLIST.md."
+  ]
+}

@@ -1,0 +1,13 @@
+---
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { pages } from '../../data/pages';
+import { detailHref } from '../../data/navigation';
+import { getPublishedEntries } from '../../utils/content';
+const services = await getPublishedEntries('services');
+const copy = pages.services;
+---
+<CatalogLayout label="Layanan" {...copy}>
+  {services.length ? <><p class="muted catalog-count">{services.length} layanan</p><h2 class="sr-only">Daftar layanan</h2><div class="card-grid">{services.map(({ data }) => <ServiceCard data={data} href={detailHref('services', data.slug)} />)}</div></> : <EmptyState id="services-empty" title={copy.emptyTitle} description={copy.emptyDescription} actionLabel={copy.actionLabel} actionHref={copy.actionHref} />}
+</CatalogLayout>

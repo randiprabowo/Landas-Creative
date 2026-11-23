@@ -1,0 +1,28 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import ContentImage from '../components/ContentImage.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { home } from '../data/home';
+import { pages } from '../data/pages';
+import { site } from '../data/site';
+import { resolveAsset } from '../utils/assets';
+const copy = pages.about;
+---
+<CatalogLayout label="Tentang Kami" {...copy}>
+  <div class="profile-grid"><section aria-labelledby="profile-heading"><h2 id="profile-heading">{copy.profileTitle}</h2><p class="muted">{copy.profile}</p><a class="button button--secondary" href="/layanan">Jelajahi Layanan <span aria-hidden="true">↗</span></a></section><div class="profile-logo"><ContentImage src={resolveAsset(site.logo)} alt="Identitas LNDS, Foundations & Growth" ratio="11 / 6" fit="contain" showKind={false} sizes="(min-width: 768px) 40vw, 100vw" /></div></div>
+  {(copy.vision || copy.mission.length > 0) && <div class="vision-grid">{copy.vision && <section aria-labelledby="vision-heading"><h2 id="vision-heading">Visi</h2><p>{copy.vision}</p></section>}{copy.mission.length > 0 && <section aria-labelledby="mission-heading"><h2 id="mission-heading">Misi</h2><ul>{copy.mission.map((item) => <li>{item}</li>)}</ul></section>}</div>}
+  <section class="about-section" aria-labelledby="commitments-heading"><SectionHeading id="commitments-heading" eyebrow="Komitmen kami" title={copy.commitmentTitle} /><div class="commitment-grid">{home.introduction.commitments.map((item) => <article><h3>{item.title}</h3><p class="muted">{item.description}</p></article>)}</div></section>
+  <section class="about-section" aria-labelledby="about-process"><SectionHeading id="about-process" {...home.workflow} /><ProcessSteps steps={home.workflow.steps} /></section>
+</CatalogLayout>
+<style>
+  .profile-grid, .vision-grid { display: grid; gap: var(--space-8); align-items: center; }
+  .profile-grid h2 { max-width: 24ch; }
+  .profile-grid .button { margin-top: var(--space-4); }
+  .profile-logo { overflow: hidden; border-radius: var(--radius-card); }
+  .about-section, .vision-grid { margin-top: var(--section-space); }
+  .commitment-grid { display: grid; gap: var(--space-8); }
+  .commitment-grid article { border-top: 2px solid var(--color-brand); padding-top: var(--space-6); }
+  .commitment-grid h3 { margin-bottom: var(--space-3); } .commitment-grid p { margin-bottom: 0; }
+  @media (min-width: 768px) { .profile-grid { grid-template-columns: 1.2fr 1fr; gap: var(--space-12); } .vision-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .commitment-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+</style>

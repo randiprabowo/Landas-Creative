@@ -1,0 +1,28 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  actionLabel?: string;
+  actionHref?: string;
+}
+const { id, title, description, actionLabel, actionHref } = Astro.props;
+---
+
+<section class="empty-state" id={id} aria-labelledby={`${id}-heading`}>
+  <span class="empty-marker" aria-hidden="true"></span>
+  <h2 id={`${id}-heading`}>{title}</h2>
+  <p>{description}</p>
+  <span class="state-label">Sedang disiapkan</span>
+  {actionLabel && actionHref && <div class="empty-action"><a class="button button--secondary" href={actionHref}>{actionLabel} <span aria-hidden="true">↗</span></a></div>}
+</section>
+
+<style>
+  .empty-state { min-width: 0; padding: var(--space-6); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
+  .empty-marker { display: block; width: var(--space-8); height: 3px; background: var(--color-brand); margin-bottom: var(--space-6); }
+  h2 { font-size: var(--text-h3); margin-bottom: var(--space-3); }
+  p { color: var(--color-muted); font-size: var(--text-caption); }
+  .state-label { display: inline-block; padding: var(--space-1) var(--space-3); border-radius: var(--radius-control); background: var(--color-surface-soft); color: var(--color-brand); font-size: var(--text-caption); }
+  .empty-action { margin-top: var(--space-6); }
+  @media (min-width: 768px) { .empty-state { padding: var(--space-12); } }
+</style>

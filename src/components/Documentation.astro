@@ -1,0 +1,7 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Gallery from './Gallery.astro';
+interface Props { images: CollectionEntry<'projects'>['data']['images']; photoLabel?: string; }
+const { images, photoLabel = 'Foto dokumentasi' } = Astro.props;
+---
+<Gallery images={images} photoLabel={photoLabel} id="documentation" />

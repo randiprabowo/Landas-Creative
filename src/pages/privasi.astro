@@ -1,0 +1,15 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import { pages } from '../data/pages';
+const copy = pages.privacy;
+---
+<CatalogLayout label="Privasi" {...copy}>
+  <div class="privacy-copy">
+    {copy.sections.map((section) => <section>
+      <h2>{section.title}</h2>
+      {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {section.linkHref && <a href={section.linkHref}>{section.linkLabel}</a>}
+    </section>)}
+  </div>
+</CatalogLayout>
+<style>.privacy-copy { max-width: 70ch; } .privacy-copy section + section { margin-top: var(--space-8); } .privacy-copy h2 { font-size: clamp(1.5rem, 3vw, 2rem); }</style>

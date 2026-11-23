@@ -1,0 +1,29 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import type { BreadcrumbItem } from '../data/navigation';
+import type { ImageMetadata } from 'astro';
+import '../styles/detail.css';
+interface Props { title: string; description: string; eyebrow: string; subtitle?: string; breadcrumbs: BreadcrumbItem[]; demo?: boolean; seoImage?: ImageMetadata; seoImageAlt?: string; consultationHref?: string; }
+const { title, description, eyebrow, subtitle, breadcrumbs, demo = false, seoImage, seoImageAlt, consultationHref } = Astro.props;
+const isDemo = import.meta.env.DEV && demo;
+---
+<BaseLayout title={`${title} | Landas Creative`} description={description} noindex={isDemo ? true : undefined} {seoImage} {seoImageAlt} {consultationHref}>
+  <div class="container detail-breadcrumb"><Breadcrumb items={breadcrumbs} /></div>
+  {isDemo && <aside class="container demo-notice"><strong>DEMO · Pratinjau development</strong><p>Data buatan untuk mengevaluasi template. Bukan penawaran atau dokumentasi pekerjaan Landas Creative.</p><a href="/_preview/kartu">Kembali ke pratinjau komponen</a></aside>}
+  <header class="container detail-heading"><p class="eyebrow">{eyebrow}</p><h1>{title}</h1>{subtitle && <p class="detail-subtitle">{subtitle}</p>}<p class="detail-lead">{description}</p></header>
+  <div class="container detail-content"><slot /></div>
+</BaseLayout>
+<style>
+  .detail-breadcrumb { padding-top: var(--space-6); }
+  .detail-heading { padding-block: var(--space-6) var(--space-8); }
+  .eyebrow { margin-bottom: var(--space-4); }
+  h1 { max-width: 27ch; font-size: clamp(1.875rem, 1.45rem + 1.7vw, 3rem); margin-bottom: var(--space-4); }
+  .detail-lead { max-width: 65ch; margin-bottom: 0; color: var(--color-muted); }
+  .detail-subtitle { margin-bottom: var(--space-4); color: var(--color-brand); font-weight: 600; }
+  .detail-content { padding-bottom: var(--section-space); }
+  .demo-notice { margin-top: var(--space-6); padding: var(--space-6); border: 1px solid var(--color-control-border); background: var(--color-surface-soft); border-radius: var(--radius-card); }
+  .demo-notice strong { color: var(--color-danger); } .demo-notice p { margin-block: var(--space-2) 0; font-size: var(--text-caption); }
+  .demo-notice a { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-caption); }
+  @media (min-width: 768px) { .detail-lead { font-size: var(--text-lead); } }
+</style>

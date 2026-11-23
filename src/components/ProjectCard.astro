@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ContentImage from './ContentImage.astro';
+interface Props { data: CollectionEntry<'projects'>['data']; href?: string; demo?: boolean; }
+const { data, href, demo = false } = Astro.props;
+const isDemo = import.meta.env.DEV && demo;
+const visible = data.publishStatus === 'published' || isDemo;
+const cover = data.images[0]?.permissionConfirmed ? data.images[0] : undefined;
+---
+{visible && <article class="project-card">
+  {isDemo && <p class="demo-label">DEMO · Bukan proyek nyata</p>}
+  <div class="project-media"><ContentImage src={cover?.src} alt={cover?.alt ?? data.title} kind={cover?.kind} caption={cover?.caption} ratio="3 / 2" photoLabel={data.projectStatus === 'selesai' ? 'Hasil Selesai' : 'Proses Pengerjaan'} /></div>
+  <div class="project-meta"><span>{data.projectStatus === 'selesai' ? 'Selesai' : 'Berjalan'}</span><span>{data.publicLocation}</span></div>
+  <h3>{href ? <a href={href}>{data.title}</a> : data.title}</h3>
+  <p class="muted">{data.summary}</p>
+  {href ? <a class="card-link" href={href}>Lihat Proyek <span aria-hidden="true">↗</span><span class="sr-only"> {data.title}</span></a> : <p class="card-pending">Rincian proyek sedang disiapkan.</p>}
+</article>}
+<style>
+  .project-card { min-width: 0; }
+  .project-media { overflow: hidden; border-radius: var(--radius-card); }
+  .project-meta { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-block: var(--space-6) var(--space-3); color: var(--color-brand); font-size: var(--text-caption); }
+  h3 { margin-bottom: var(--space-3); } h3 a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-ink); }
+  .card-link { display: inline-flex; align-items: center; min-height: 44px; gap: var(--space-3); font-weight: 600; }
+  .card-pending { margin-bottom: 0; color: var(--color-muted); font-size: var(--text-caption); }
+  .demo-label { color: var(--color-danger); font-size: var(--text-caption); font-weight: 700; }
+</style>

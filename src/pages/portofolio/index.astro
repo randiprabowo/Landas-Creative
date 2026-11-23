@@ -1,0 +1,13 @@
+---
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { pages } from '../../data/pages';
+import { detailHref } from '../../data/navigation';
+import { getPublishedEntries } from '../../utils/content';
+const projects = await getPublishedEntries('projects');
+const copy = pages.projects;
+---
+<CatalogLayout label="Portofolio" {...copy}>
+  {projects.length ? <><p class="muted catalog-count">{projects.length} proyek</p><h2 class="sr-only">Daftar proyek</h2><div class="card-grid">{projects.map(({ data }) => <ProjectCard data={data} href={detailHref('projects', data.slug)} />)}</div></> : <EmptyState id="projects-empty" title={copy.emptyTitle} description={copy.emptyDescription} actionLabel={copy.actionLabel} actionHref={copy.actionHref} />}
+</CatalogLayout>

@@ -1,0 +1,29 @@
+{
+  "contact": {
+    "eyebrow": "Kontak Landas Creative",
+    "title": "Ceritakan rencana Anda.",
+    "description": "Siapkan kebutuhan, lokasi, dan hal yang ingin Anda diskusikan agar percakapan berikutnya lebih terarah.",
+    "informationTitle": "Mari mulai dari kebutuhan.",
+    "introduction": "Jelaskan kebutuhan dan lokasi umum Anda. Untuk properti, sebutkan pilihan yang ingin ditanyakan. Untuk pekerjaan, ceritakan gambaran lingkupnya.",
+    "pendingNotice": "Kanal WhatsApp resmi sedang disiapkan. Anda tetap dapat menyusun dan meninjau pesan di sini; pesan belum dapat dibuka ke tim kami.",
+    "areaEmpty": "Informasi area layanan dan alamat publik akan ditampilkan setelah tersedia.",
+    "formTitle": "Susun pesan konsultasi"
+  },
+  "partnership": {
+    "eyebrow": "Kemitraan",
+    "title": "Buka ruang untuk tumbuh bersama.",
+    "description": "Tertarik bergabung sebagai agen pemasaran? Sampaikan minat Anda untuk mengenal peluang kemitraan bersama Landas Creative.",
+    "informationTitle": "Kenali peluangnya, bahas kebutuhannya.",
+    "introduction": "Halaman ini membantu Anda menyiapkan perkenalan dan pertanyaan tentang kemitraan agen pemasaran properti.",
+    "terms": null,
+    "termsPending": "Informasi alur bergabung dan ketentuan kemitraan sedang disiapkan. Cakupan peran, mekanisme kerja, dan imbalan perlu dibahas serta disepakati bersama.",
+    "preparation": ["Nama dan wilayah aktivitas Anda.", "Pengalaman yang relevan, bila ada.", "Bentuk kerja sama dan pertanyaan yang ingin dibahas."],
+    "formTitle": "Sampaikan minat kemitraan"
+  },
+  "form": {
+    "handoffNotice": "Pesan akan dibuka di WhatsApp. Silakan periksa lalu kirim untuk menghubungi tim kami.",
+    "privacyNotice": "Isian diproses di browser untuk menyusun pesan, tanpa disimpan oleh website. Hindari menyertakan dokumen pribadi atau data sensitif.",
+    "previewLabel": "Pratinjau Pesan",
+    "submitLabel": "Lanjut ke WhatsApp"
+  }
+}

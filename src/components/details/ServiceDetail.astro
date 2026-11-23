@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ContentImage from '../ContentImage.astro';
+import SupplementalMedia from '../SupplementalMedia.astro';
+import ContactNotice from '../ContactNotice.astro';
+import ProjectCard from '../ProjectCard.astro';
+import { pages } from '../../data/pages';
+import { detailHref } from '../../data/navigation';
+import { formatDate, formatPrice } from '../../utils/format';
+interface Props { entry: CollectionEntry<'services'>; relatedProjects?: CollectionEntry<'projects'>[]; demo?: boolean; }
+const { entry, relatedProjects = [], demo = false } = Astro.props;
+const { data } = entry;
+const visible = data.publishStatus === 'published' || (import.meta.env.DEV && demo);
+const cover = data.coverImage?.permissionConfirmed ? data.coverImage : undefined;
+---
+{visible && <>
+  <div class="detail-columns">
+    <div>
+      <div class="service-cover"><ContentImage src={cover?.src} alt={cover?.alt ?? data.title} kind={cover?.kind} caption={cover?.caption} ratio="3 / 2" priority /></div>
+      {(data.video?.permissionConfirmed || data.model?.permissionConfirmed) && <SupplementalMedia id="service-media" video={data.video} model={data.model} />}
+      <section class="detail-section" aria-labelledby="service-overview"><h2 id="service-overview">Tentang layanan</h2><div class="prose"><slot /></div></section>
+      {data.scope.length > 0 && <section class="detail-section" aria-labelledby="service-scope"><h2 id="service-scope">Lingkup pekerjaan</h2><ul class="detail-list">{data.scope.map((item) => <li>{item}</li>)}</ul></section>}
+      <section class="detail-section" aria-labelledby="service-exclusions"><h2 id="service-exclusions">Batas cakupan</h2>{data.exclusions.length ? <ul class="detail-list">{data.exclusions.map((item) => <li>{item}</li>)}</ul> : <p class="muted">Batas cakupan perlu dibahas sesuai kebutuhan dan penawaran pekerjaan.</p>}</section>
+      {data.steps.length > 0 && <section class="detail-section" aria-labelledby="service-steps"><h2 id="service-steps">Cara kerja layanan</h2><ol class="detail-list">{data.steps.map((item) => <li>{item}</li>)}</ol></section>}
+    </div>
+    <aside class="detail-panel" aria-labelledby="service-price"><h2 id="service-price">Informasi biaya</h2>
+      <p class="price-value">{data.startingPrice !== undefined && data.priceConfirmed ? <>Mulai dari {formatPrice(data.startingPrice)}{data.priceUnit && <span class="price-unit">/{data.priceUnit}</span>}</> : 'Hubungi kami untuk informasi harga'}</p>
+      <p class="price-note">{data.priceNote || pages.detail.costNote}</p>
+      <ContactNotice kind="layanan" slug={data.slug} demo={demo} />
+      <p class="detail-updated">Informasi diperbarui <time datetime={data.updatedAt}>{formatDate(data.updatedAt)}</time>.</p>
+      <a class="detail-alternative" href="/layanan">Lihat Layanan Lain <span aria-hidden="true">↗</span></a>
+    </aside>
+  </div>
+  {relatedProjects.length > 0 && <section class="detail-section" aria-labelledby="service-projects"><h2 id="service-projects">Dokumentasi terkait</h2><div class="card-grid">{relatedProjects.map((project) => <ProjectCard data={project.data} href={detailHref('projects', project.data.slug)} />)}</div></section>}
+</>}
+<style>.service-cover { overflow: hidden; border-radius: var(--radius-card); } .price-unit { font-size: var(--text-body); font-weight: 400; } .detail-updated { margin-top: var(--space-6); }</style>

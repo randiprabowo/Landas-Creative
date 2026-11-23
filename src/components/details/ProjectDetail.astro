@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ContactNotice from '../ContactNotice.astro';
+import Documentation from '../Documentation.astro';
+import ServiceCard from '../ServiceCard.astro';
+import { detailHref } from '../../data/navigation';
+import { categoryLabels, projectStatusLabels } from '../../data/labels';
+import { formatDate } from '../../utils/format';
+interface Props { entry: CollectionEntry<'projects'>; relatedServices?: CollectionEntry<'services'>[]; demo?: boolean; }
+const { entry, relatedServices = [], demo = false } = Astro.props;
+const { data } = entry;
+const visible = data.publishStatus === 'published' || (import.meta.env.DEV && demo);
+---
+{visible && <>
+  <Documentation images={data.images} photoLabel={data.projectStatus === 'selesai' ? 'Hasil Selesai' : 'Proses Pengerjaan'} />
+  <div class="detail-summary">
+    <section class="detail-panel" aria-labelledby="project-summary"><h2 id="project-summary">Ringkasan proyek</h2><dl class="detail-specs"><div><dt>Jenis pekerjaan</dt><dd>{categoryLabels[data.category]}</dd></div><div><dt>Status</dt><dd>{projectStatusLabels[data.projectStatus]}</dd></div><div><dt>Lokasi publik</dt><dd>{data.publicLocation}</dd></div>{data.year && <div><dt>Tahun</dt><dd>{data.year}</dd></div>}</dl><p class="detail-updated">Informasi diperbarui <time datetime={data.updatedAt}>{formatDate(data.updatedAt)}</time>.</p></section>
+    <aside class="detail-panel" aria-labelledby="project-contact"><h2 id="project-contact">Punya kebutuhan serupa?</h2><ContactNotice kind="proyek" slug={data.slug} demo={demo} /><a class="detail-alternative" href="/portofolio">Kembali ke Portofolio <span aria-hidden="true">↗</span></a></aside>
+  </div>
+  <section class="detail-section" aria-labelledby="project-overview"><h2 id="project-overview">Konteks & hasil pekerjaan</h2><div class="project-description prose">{data.body.split(/\n\s*\n/).map((paragraph) => <p>{paragraph}</p>)}</div></section>
+  {data.scope.length > 0 && <section class="detail-section" aria-labelledby="project-scope"><h2 id="project-scope">Lingkup pekerjaan</h2><ul class="detail-list">{data.scope.map((item) => <li>{item}</li>)}</ul></section>}
+  {relatedServices.length > 0 && <section class="detail-section" aria-labelledby="project-services"><h2 id="project-services">Layanan terkait</h2><div class="card-grid">{relatedServices.map((service) => <ServiceCard data={service.data} href={detailHref('services', service.data.slug)} />)}</div></section>}
+</>}
+<style>.project-description p { white-space: pre-line; } .detail-updated { margin-block: var(--space-6) 0; }</style>

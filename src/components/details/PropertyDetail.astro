@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import AvailabilityBadge from '../AvailabilityBadge.astro';
+import ContactNotice from '../ContactNotice.astro';
+import Gallery from '../Gallery.astro';
+import Documentation from '../Documentation.astro';
+import SupplementalMedia from '../SupplementalMedia.astro';
+import PropertyCard from '../PropertyCard.astro';
+import { detailHref } from '../../data/navigation';
+import { propertyTypeLabels } from '../../data/labels';
+import { formatArea, formatDate, formatPrice } from '../../utils/format';
+interface Props { entry: CollectionEntry<'properties'>; relatedProperties?: CollectionEntry<'properties'>[]; demo?: boolean; }
+const { entry, relatedProperties = [], demo = false } = Astro.props;
+const { data } = entry;
+const visible = data.publishStatus === 'published' || (import.meta.env.DEV && demo);
+const sold = data.availability === 'terjual';
+---
+{visible && <>
+  <Documentation images={data.images} photoLabel="Foto properti" />
+  {(data.video?.permissionConfirmed || data.model?.permissionConfirmed) && <SupplementalMedia id="property-media" video={data.video} model={data.model} />}
+  <div class="detail-summary">
+    <section class="detail-panel" aria-labelledby="property-summary"><AvailabilityBadge status={data.availability} /><h2 id="property-summary">{propertyTypeLabels[data.propertyType]}</h2>
+      <p class="price-value">{data.price !== undefined && data.priceConfirmed ? formatPrice(data.price) : 'Hubungi kami untuk informasi harga'}</p>
+      <dl class="detail-specs">
+        <div><dt>Luas tanah</dt><dd>{formatArea(data.landAreaM2)}</dd></div>
+        <div><dt>Luas bangunan</dt><dd>{formatArea(data.buildingAreaM2)}</dd></div>
+        {data.bedrooms !== undefined && <div><dt>Kamar tidur</dt><dd>{data.bedrooms}</dd></div>}
+        {data.bathrooms !== undefined && <div><dt>Kamar mandi</dt><dd>{data.bathrooms}</dd></div>}
+        {data.floors !== undefined && <div><dt>Lantai</dt><dd>{data.floors}</dd></div>}
+        <div><dt>Wilayah</dt><dd>{data.region}</dd></div>
+      </dl>
+      <p class="property-id">ID properti: <strong>{entry.id}</strong></p>
+      <p class="detail-updated">Informasi diperbarui <time datetime={data.updatedAt}>{formatDate(data.updatedAt)}</time>.</p>
+    </section>
+    <aside class="detail-panel" aria-labelledby="property-next"><h2 id="property-next">{sold ? 'Cari pilihan lain' : 'Langkah berikutnya'}</h2>
+      {sold ? <><p>Properti ini berstatus terjual. Silakan jelajahi katalog untuk mencari pilihan lain.</p><a class="button" href="/properti">Cari Properti Lain <span aria-hidden="true">↗</span></a></> : <><p>Pahami spesifikasi dan lokasi publik sebelum membahas ketersediaan serta rencana survei.</p><ContactNotice kind="properti" slug={data.slug} demo={demo} /></>}
+    </aside>
+  </div>
+  <section class="detail-section" aria-labelledby="property-description"><h2 id="property-description">Tentang properti</h2><div class="property-description prose">{data.description.split(/\n\s*\n/).map((paragraph) => <p>{paragraph}</p>)}</div></section>
+  <section class="detail-section" aria-labelledby="property-location"><h2 id="property-location">Lokasi & peran pemasaran</h2><p>{data.publicLocation}</p><p class="muted">{data.marketingRole}</p></section>
+  {data.facilities.length > 0 && <section class="detail-section" aria-labelledby="property-facilities"><h2 id="property-facilities">Fasilitas</h2><ul class="detail-list">{data.facilities.map((item) => <li>{item}</li>)}</ul></section>}
+  {data.floorPlan?.permissionConfirmed && <section class="detail-section" aria-labelledby="property-floor-plan"><h2 id="property-floor-plan">Denah</h2><div class="floor-plan"><Gallery images={[data.floorPlan]} id="floor-plan" label="Denah properti" ratio="auto" /></div></section>}
+  {relatedProperties.length > 0 && <section class="detail-section" aria-labelledby="property-related"><h2 id="property-related">Pilihan terkait</h2><div class="card-grid">{relatedProperties.map((property) => <PropertyCard data={property.data} href={detailHref('properties', property.data.slug)} />)}</div></section>}
+</>}
+<style>
+  #property-summary { margin-block: var(--space-4) var(--space-6); }
+  .property-id { margin-top: var(--space-6); font-size: var(--text-caption); }
+  .detail-updated { margin-bottom: 0; }
+  .property-description p { white-space: pre-line; }
+  .floor-plan { max-width: 60rem; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-card); }
+</style>

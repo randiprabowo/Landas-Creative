@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-14T10:52:51.731Z",
+  "node": "v24.15.0",
+  "npm": "12.0.2",
+  "cleanInstall": {
+    "command": "npm ci --no-audit --no-fund",
+    "exitCode": 0,
+    "packagesAdded": 356
+  },
+  "check": {
+    "files": 72,
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0,
+    "exitCode": 0
+  },
+  "tests": {
+    "passed": 33,
+    "failed": 0,
+    "exitCode": 0
+  },
+  "lockfileUnchanged": true,
+  "lockfileSha256": "d79f1ed17ff3dae4aa7b703b84428db26592900d0904e044768f8b3d00f54c17",
+  "files": 22,
+  "mainBuildDigest": "8143b9dcb9b03bd024a4860162f96e38c376e2abceaaf38d166807ed4f68c3db",
+  "cleanBuildDigest": "8143b9dcb9b03bd024a4860162f96e38c376e2abceaaf38d166807ed4f68c3db",
+  "snapshotBuildDigest": "8143b9dcb9b03bd024a4860162f96e38c376e2abceaaf38d166807ed4f68c3db",
+  "differences": [],
+  "sourceDifferences": [],
+  "release": ".releases/2026-11-14T10-52-05-929Z-8143b9dcb9",
+  "passed": true
+}

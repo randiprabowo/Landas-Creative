@@ -1,0 +1,86 @@
+{
+  "services": {
+    "eyebrow": "Layanan Landas Creative",
+    "title": "Rencanakan pekerjaan sesuai kebutuhan Anda.",
+    "description": "Kenali lingkup, proses, dan informasi biaya layanan sebelum menentukan langkah berikutnya.",
+    "emptyTitle": "Informasi layanan sedang disiapkan.",
+    "emptyDescription": "Rincian layanan akan ditampilkan setelah siap dibagikan. Sambil menunggu, kenali alur kerja untuk menyiapkan kebutuhan Anda.",
+    "actionLabel": "Kenali Cara Kerja",
+    "actionHref": "/#cara-kerja"
+  },
+  "properties": {
+    "eyebrow": "Katalog properti",
+    "title": "Ruang untuk rencana berikutnya.",
+    "description": "Pilihan rumah dan ruko dengan informasi lokasi, spesifikasi, harga, dan status ketersediaan.",
+    "emptyTitle": "Informasi properti sedang disiapkan.",
+    "emptyDescription": "Belum ada pilihan properti yang dapat ditampilkan saat ini. Informasi akan ditambahkan setelah siap, lengkap dengan spesifikasi dan status ketersediaannya.",
+    "actionLabel": "Konsultasikan Kebutuhan",
+    "actionHref": "/kontak#pesan"
+  },
+  "projects": {
+    "eyebrow": "Portofolio",
+    "title": "Kenali pekerjaan, dari rencana hingga hasil.",
+    "description": "Lingkup dan dokumentasi proyek Landas Creative. Foto pekerjaan dan visualisasi dibedakan agar konteksnya jelas.",
+    "emptyTitle": "Dokumentasi proyek sedang disiapkan.",
+    "emptyDescription": "Dokumentasi proyek akan ditambahkan setelah siap dipublikasikan. Setiap gambar akan disertai konteks, jenis pekerjaan, dan status proyek.",
+    "actionLabel": "Kenali Landas Creative",
+    "actionHref": "/tentang"
+  },
+  "about": {
+    "eyebrow": "Tentang Landas Creative",
+    "title": "Foundations & Growth.",
+    "description": "Landas Creative menghubungkan kebutuhan perencanaan, pembangunan, infrastruktur air, dan pemasaran properti melalui proses yang terarah.",
+    "profileTitle": "Dari kebutuhan, menjadi rencana yang jelas.",
+    "profile": "Lingkup layanan meliputi pembangunan rumah pribadi, komersial dan subsidi, desain 3D rumah, sumur bor, atap spandek dan baja ringan, serta pemasaran properti.",
+    "vision": null,
+    "mission": [],
+    "commitmentTitle": "Komitmen dalam setiap langkah."
+  },
+  "privacy": {
+    "eyebrow": "Privasi",
+    "title": "Cara website menangani isian Anda.",
+    "description": "Penjelasan penggunaan formulir penyusun pesan dan tautan ke layanan pihak ketiga pada website Landas Creative.",
+    "sections": [
+      {
+        "title": "Formulir penyusun pesan",
+        "paragraphs": ["Nama, minat, lokasi, dan pesan digunakan di browser Anda untuk membuat pratinjau serta tautan WhatsApp. Website ini tidak mengirim isian formulir ke server Landas Creative, tidak memiliki database lead, dan tidak menyimpan isian di localStorage atau analytics.", "Pratinjau belum berarti pesan terkirim. Hindari memasukkan nomor identitas, dokumen tanah, atau data pribadi sensitif."]
+      },
+      {
+        "title": "Saat beralih ke WhatsApp",
+        "paragraphs": ["Ketika kanal resmi tersedia dan Anda memilih Lanjut ke WhatsApp, isi pesan dimasukkan ke tautan menuju layanan WhatsApp. Periksa isi pesan, lalu kirim sendiri melalui WhatsApp bila Anda ingin menghubungi tim.", "Isi pada tautan dapat tercatat dalam riwayat browser atau ditangani oleh layanan WhatsApp. Pemrosesan di layanan tersebut mengikuti kebijakan privasi WhatsApp."],
+        "linkLabel": "Kebijakan privasi WhatsApp",
+        "linkHref": "https://www.whatsapp.com/legal/privacy-policy"
+      },
+      {
+        "title": "Tautan eksternal",
+        "paragraphs": ["Tautan peta dan media sosial, bila tersedia, membuka layanan pihak ketiga. Jika Anda memilih Video YouTube, pemutar dimuat di dalam halaman dan browser terhubung ke YouTube. Kebijakan privasi Google berlaku saat Anda menggunakan pemutar."],
+        "linkLabel": "Kebijakan privasi Google",
+        "linkHref": "https://policies.google.com/privacy?hl=id"
+      },
+      {
+        "title": "Cookie dan pengukuran",
+        "paragraphs": ["Aplikasi website saat ini tidak memasang analytics atau cookie untuk pemasaran. Penjelasan ini perlu diperbarui bila fungsi atau layanan yang digunakan berubah."]
+      },
+      {
+        "title": "Pertanyaan mengenai data",
+        "paragraphs": ["Gunakan kanal resmi pada halaman kontak bila tersedia. Konfigurasi hosting dan pemrosesan log akses akan ditinjau sebelum website dipublikasikan."],
+        "linkLabel": "Halaman kontak",
+        "linkHref": "/kontak"
+      }
+    ]
+  },
+  "notFound": {
+    "eyebrow": "404 · Halaman tidak ditemukan",
+    "title": "Tujuan Anda belum ditemukan.",
+    "description": "Alamat halaman mungkin berubah atau tidak tersedia. Silakan kembali ke beranda untuk melanjutkan.",
+    "seoTitle": "Halaman tidak ditemukan | Landas Creative",
+    "seoDescription": "Halaman yang Anda cari tidak ditemukan. Kembali ke beranda Landas Creative.",
+    "actionLabel": "Kembali ke Beranda"
+  },
+  "detail": {
+    "costNote": "Biaya akhir menyesuaikan ukuran, spesifikasi, kondisi lokasi, dan lingkup pekerjaan.",
+    "contactNotice": "Kontak konsultasi sedang disiapkan. Informasi kontak resmi akan ditampilkan setelah tersedia.",
+    "contactActionLabel": "Siapkan Pertanyaan",
+    "contactHref": "/kontak#pesan"
+  }
+}

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import PropertyCard from '../components/PropertyCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ContentImage from '../components/ContentImage.astro';
+import { demoServices, demoProperties, demoProjects } from './fixtures';
+// Route ini berada di luar src/pages dan hanya didaftarkan saat `astro dev`.
+---
+<BaseLayout title="DEMO — Pratinjau kartu | Landas Creative" noindex>
+  <div class="container section">
+    <div class="preview-banner"><p class="eyebrow">Development preview · DEMO</p><h1>Pratinjau komponen kartu</h1><p>Seluruh data pada halaman ini adalah DEMO untuk evaluasi desain. Bukan layanan terbit, listing properti, harga, atau bukti pekerjaan nyata. Halaman dan fixture tidak disertakan dalam build produksi.</p><a href="/">Kembali ke beranda</a></div>
+    <nav class="preview-nav" aria-label="Bagian pratinjau"><a href="#demo-services">Kartu layanan</a><a href="#demo-properties">Kartu properti</a><a href="#demo-projects">Kartu proyek</a><a href="#demo-fallback">Gambar gagal</a></nav>
+    <nav class="preview-nav" aria-label="Pratinjau detail"><a href="/_preview/interaksi">Pencarian dan pesan DEMO</a><a href="/_preview/detail/layanan">Detail layanan DEMO</a><a href="/_preview/detail/properti">Detail properti DEMO</a><a href="/_preview/detail/properti-terjual">Properti terjual DEMO</a><a href="/_preview/detail/proyek">Detail proyek DEMO</a></nav>
+    <section aria-labelledby="demo-services"><h2 id="demo-services">Layanan · DEMO</h2><div class="card-grid">{demoServices.map((data, index) => <ServiceCard data={data} href={index === 0 ? '/_preview/detail/layanan' : undefined} demo />)}</div></section>
+    <section aria-labelledby="demo-properties"><h2 id="demo-properties">Properti · DEMO</h2><p>Memeriksa harga kosong, judul panjang, gambar kosong, dan status terjual. Tidak ada tombol survei.</p><div class="card-grid">{demoProperties.map((data) => <PropertyCard data={data} href={data.availability === 'terjual' ? '/_preview/detail/properti-terjual' : '/_preview/detail/properti'} demo />)}</div></section>
+    <section aria-labelledby="demo-projects"><h2 id="demo-projects">Portofolio · DEMO</h2><div class="card-grid">{demoProjects.map((data) => <ProjectCard data={data} href="/_preview/detail/proyek" demo />)}</div></section>
+    <section aria-labelledby="demo-fallback"><h2 id="demo-fallback">Gambar gagal · DEMO</h2><p>Fixture development ini sengaja meminta URL gambar yang tidak ada untuk memeriksa fallback.</p><div class="fallback-preview"><ContentImage src={{ src: '/_preview/gambar-tidak-ada.webp', width: 960, height: 720, format: 'webp' }} alt="DEMO — Gambar sengaja tidak tersedia" /></div></section>
+  </div>
+</BaseLayout>
+<style>
+  .preview-banner { padding: var(--space-6); background: var(--color-surface-soft); border: 1px solid var(--color-control-border); border-radius: var(--radius-card); }
+  .preview-banner h1 { font-size: var(--text-h2); }
+  .preview-banner a { display: inline-flex; align-items: center; min-height: 44px; }
+  section { margin-top: var(--space-16); }
+  .fallback-preview { max-width: 360px; }
+  .preview-nav { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
+  .preview-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+</style>
