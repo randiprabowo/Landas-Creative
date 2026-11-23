@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-23T03:57:55.290Z",
+  "pages": [
+    {
+      "path": "/404",
+      "status": 200,
+      "title": "Halaman tidak ditemukan | Landas Creative",
+      "description": "Halaman yang Anda cari tidak ditemukan. Kembali ke beranda Landas Creative."
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Landas Creative | Foundations &amp; Growth",
+      "description": "Landas Creative membantu kebutuhan pembangunan rumah, desain 3D, sumur bor, atap spandek dan baja ringan, serta pemasaran properti."
+    },
+    {
+      "path": "/kemitraan",
+      "status": 200,
+      "title": "Kemitraan | Landas Creative",
+      "description": "Tertarik bergabung sebagai agen pemasaran? Sampaikan minat Anda untuk mengenal peluang kemitraan bersama Landas Creative."
+    },
+    {
+      "path": "/kontak",
+      "status": 200,
+      "title": "Kontak | Landas Creative",
+      "description": "Siapkan kebutuhan, lokasi, dan hal yang ingin Anda diskusikan agar percakapan berikutnya lebih terarah."
+    },
+    {
+      "path": "/layanan",
+      "status": 200,
+      "title": "Layanan | Landas Creative",
+      "description": "Kenali lingkup, proses, dan informasi biaya layanan sebelum menentukan langkah berikutnya."
+    },
+    {
+      "path": "/portofolio",
+      "status": 200,
+      "title": "Portofolio | Landas Creative",
+      "description": "Lingkup dan dokumentasi proyek Landas Creative. Foto pekerjaan dan visualisasi dibedakan agar konteksnya jelas."
+    },
+    {
+      "path": "/privasi",
+      "status": 200,
+      "title": "Privasi | Landas Creative",
+      "description": "Penjelasan penggunaan formulir penyusun pesan dan tautan ke layanan pihak ketiga pada website Landas Creative."
+    },
+    {
+      "path": "/properti",
+      "status": 200,
+      "title": "Properti | Landas Creative",
+      "description": "Pilihan rumah dan ruko dengan informasi lokasi, spesifikasi, harga, dan status ketersediaan."
+    },
+    {
+      "path": "/tentang",
+      "status": 200,
+      "title": "Tentang Kami | Landas Creative",
+      "description": "Landas Creative menghubungkan kebutuhan perencanaan, pembangunan, infrastruktur air, dan pemasaran properti melalui proses yang terarah."
+    }
+  ],
+  "internalLinks": 173,
+  "assets": [
+    {
+      "path": "/_astro/logo.epN5mQq1_1GQYk9.png",
+      "status": 200
+    },
+    {
+      "path": "/_astro/BaseLayout.Clpfvs7d.css",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_ZnwlYz.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_2k8oB0.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_ZKYlXR.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/logo.epN5mQq1_1vJXoS.webp",
+      "status": 200
+    },
+    {
+      "path": "/_astro/index.MfkNf2bz.css",
+      "status": 200
+    },
+    {
+      "path": "/_astro/architecture.BBflvIBA_Z1YGs10.svg",
+      "status": 200
+    },
+    {
+      "path": "/_astro/architecture.BBflvIBA_1Vpt3x.svg",
+      "status": 200
+    },
+    {
+      "path": "/_astro/architecture.BBflvIBA_Z2am314.svg",
+      "status": 200
+    }
+  ],
+  "hiddenRoutes": [
+    {
+      "path": "/_preview/kartu",
+      "status": 404
+    },
+    {
+      "path": "/_preview/interaksi",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/layanan",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/properti",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/properti-terjual",
+      "status": 404
+    },
+    {
+      "path": "/_preview/detail/proyek",
+      "status": 404
+    },
+    {
+      "path": "/properti/tidak-ada",
+      "status": 404
+    },
+    {
+      "path": "/portofolio/tidak-ada",
+      "status": 404
+    },
+    {
+      "path": "/layanan/atap-spandek-baja-ringan",
+      "status": 404
+    },
+    {
+      "path": "/layanan/desain-3d",
+      "status": 404
+    },
+    {
+      "path": "/layanan/pemasaran-properti",
+      "status": 404
+    },
+    {
+      "path": "/layanan/pembangunan-rumah",
+      "status": 404
+    },
+    {
+      "path": "/layanan/sumur-bor",
+      "status": 404
+    }
+  ],
+  "issues": [],
+  "leaks": [],
+  "budgets": {
+    "homeRawUpperBoundBytesIncludingAllImageVariants": 100100,
+    "homeApplicationJsGzipEstimateBytes": 515,
+    "transferLimitBytes": 1500000,
+    "jsLimitBytes": 50000,
+    "note": "Batas atas raw memakai seluruh varian srcset, bukan pengukuran transfer field. Ukuran JavaScript adalah estimasi gzip."
+  },
+  "sourceHashes": {
+    "docs/PRD_Landas_Creative.md": "c57091929956830b5068ad946c8106c2f07286447aafc54ffa36055ab295b956",
+    "docs/DESIGN_Landas_Creative.md": "eed7bb4b8f83e059bd3f3f34c5690076f628a345a8d9b4ffcb11e895973730b5",
+    "src/data/site.json": "c5d100d1f81be85a71ddb2ab93b63bfffb49534fc395a3462a270d380addd950"
+  },
+  "indexing": {
+    "enabled": false,
+    "robots": "User-agent: *\nDisallow: /\n",
+    "sitemapEntries": 0
+  }
+}

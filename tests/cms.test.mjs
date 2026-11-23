@@ -30,11 +30,20 @@ test('koleksi CMS mempertahankan struktur Astro, referensi gambar dan status awa
   }
 });
 
-test('akses daring memerlukan konfigurasi lengkap dan menggunakan PKCE', () => {
+test('akses GitLab memerlukan konfigurasi lengkap dan menggunakan PKCE', () => {
   assert.equal(remoteBackend({}), null);
   assert.throws(() => remoteBackend({ repository: 'grup/project' }));
   const backend = remoteBackend({ repository: 'grup/project', branch: 'konten', applicationId: 'a'.repeat(64) });
   assert.equal(backend.branch, 'konten');
   assert.equal(backend.auth_type, 'pkce');
   assert.deepEqual(backend.auth_methods, ['oauth']);
+});
+
+test('akses GitHub memakai token per pengguna tanpa kredensial di konfigurasi publik', () => {
+  const settings = { provider: 'github', repository: 'owner/project', branch: 'main' };
+  assert.deepEqual(remoteBackend(settings), {
+    name: 'github', repo: 'owner/project', branch: 'main', auth_methods: ['token'],
+  });
+  assert.throws(() => remoteBackend({ ...settings, repository: 'owner/group/project' }));
+  assert.throws(() => remoteBackend({ ...settings, applicationId: 'a'.repeat(64) }));
 });

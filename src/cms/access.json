@@ -1,5 +1,6 @@
 {
-  "repository": null,
+  "provider": "github",
+  "repository": "randiprabowo/Landas-Creative",
   "applicationId": null,
   "branch": "main"
 }

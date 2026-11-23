@@ -19,17 +19,20 @@ Cloudflare perlu membangun commit yang berisi `wrangler.jsonc`. Upload manual le
 
 ### Akses editor setelah MVP
 
-Untuk alur satu pengelola, gunakan CMS lokal, periksa hasil build, lalu unggah isi `dist/` sendiri. Konfigurasi awal menghasilkan website publik tanpa rute editor. Anda dapat menggunakan hosting statis dan memasang domain secara terpisah dari penyimpanan konten.
+CMS daring memerlukan provider, repository, dan branch di `src/cms/access.json`. Konfigurasi kosong menghasilkan build tanpa rute editor. CMS lokal tetap bisa digunakan melalui `npm run dev` dan opsi **Work with Local Repository**.
 
-Jika editor perlu login dari perangkat lain, tersedia integrasi **GitLab.com OAuth dengan PKCE**. Aktifkan ketika repository dan domain sudah Anda miliki.
+#### GitHub untuk deployment Cloudflare saat ini
 
-1. Siapkan repository GitLab privat berisi sumber website. Batasi hak tulis pada pengelola yang dipercaya. Perubahan dari CMS akan tersimpan sebagai commit pada branch tujuan. Siapkan branch yang mengizinkan editor menulis dan gunakan alur upload manual yang Anda pilih.
-2. Daftarkan aplikasi OAuth di GitLab. Isi redirect URI persis sesuai alamat editor HTTPS yang akan dibuka, termasuk path `/admin/index.html`. Hapus centang **Confidential**, pilih scope **api** yang dibutuhkan Sveltia, lalu salin **Application ID** publik. Gunakan URL lengkap yang sama untuk masuk. [Petunjuk OAuth GitLab di Sveltia](https://sveltiacms.app/en/docs/backends/gitlab)
-3. Isi `repository` dengan path grup/pemilik dan nama project, `applicationId` dengan Application ID, dan `branch` dengan nama branch di `src/cms/access.json`. Hanya pengenal publik yang diperlukan. Simpan token pribadi dan client secret di luar repository dan hasil build.
-4. Jalankan check, test, dan build. Setelah Anda mengunggah hasilnya, uji login editor berizin dan penolakan akses tulis bagi akun tanpa hak. Domain, DNS dan hosting tetap dikelola pemilik. HTTPS diperlukan untuk fitur browser dan alur OAuth.
-5. Setelah perubahan disimpan secara daring, ambil revisi branch terbaru ke komputer build, tinjau perubahannya, bangun ulang, lalu unggah manual. Untuk menutup editor daring, kosongkan kedua pengenal, bangun ulang, dan ganti seluruh folder versi di hosting agar berkas admin lama ikut hilang. Untuk mencabut akses editor, cabut izin di GitLab.
+1. Commit dan push perubahan konfigurasi CMS ke repository yang terhubung dengan Cloudflare. Setelah build dan deploy berhasil, buka `/admin` pada domain Cloudflare website. Konfigurasi GitHub memakai repository `randiprabowo/Landas-Creative` dan branch `main`.
+2. Masuk ke GitHub sebagai pemilik repository. Buat **Fine-grained personal access token** dengan masa berlaku. Di **Repository access**, pilih **Only select repositories → Landas-Creative**. Di **Repository permissions**, pilih **Contents → Read and write**. [Pengaturan token GitHub](https://github.com/settings/personal-access-tokens/new) · [Izin token Sveltia](https://sveltiacms.app/en/docs/backends/github#access-token-quick-start)
+3. Di editor, pilih **Sign in with Token** lalu masukkan token. Simpan token seperti kata sandi dan gunakan hanya di layar login CMS pada domain Anda. Perubahan konten disimpan sebagai commit GitHub. Jika Cloudflare mengikuti `main` dengan deploy otomatis, menyimpan perubahan di CMS dapat memicu build baru.
+4. Untuk menutup editor daring, set `repository` dan `applicationId` ke `null` lalu deploy ulang. Cabut token dari pengaturan GitHub jika akses penyunting perlu dihentikan.
 
-Panel admin memuat aplikasi Sveltia tersendiri. Bundle utama, font ikon dan modul editor berasal dari paket yang dikunci di lockfile. Fitur tambahan atau bahasa antarmuka CMS dapat meminta aset dari CDN. Panel tidak masuk sitemap. Build dengan konfigurasi awal hanya menyertakan halaman pengunjung.
+#### GitLab dengan OAuth PKCE
+
+Isi `provider` dengan `gitlab`, `repository` dengan path repository GitLab, `branch` dengan branch tujuan, dan `applicationId` dengan Application ID publik. Daftarkan aplikasi OAuth GitLab tanpa opsi **Confidential** dan dengan scope **api**. Isi redirect URI dengan URL HTTPS yang benar-benar terlihat di bilah alamat editor setelah pengalihan host. Pada Cloudflare Workers dengan konfigurasi ini, path-nya `/admin`. Untuk mencabut akses tulis, cabut izin editor dari repository GitLab. [Petunjuk OAuth GitLab di Sveltia](https://sveltiacms.app/en/docs/backends/gitlab)
+
+Panel admin memuat aplikasi Sveltia tersendiri. Bundle utama, font ikon, dan modul editor berasal dari paket yang dikunci di lockfile. Fitur tambahan atau bahasa antarmuka CMS dapat meminta aset dari CDN. Panel mengirim arahan noindex dan berada di luar sitemap.
 
 Website dibangun oleh Astro menjadi berkas statis. Hosting menjalankan `npm ci` dengan devDependencies, lalu pemeriksaan/build; direktori yang disajikan kepada pengunjung hanya **isi `dist/`**, atau isi folder `site/` pada snapshot yang telah disetujui. Tidak ada adapter/server, database, rahasia frontend, atau environment runtime aplikasi.
 

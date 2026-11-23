@@ -1,6 +1,13 @@
 # Rencana implementasi — Landas Creative
 
-Checkpoint terbaru **23 November 2026**. Konfigurasi Cloudflare Workers untuk menyajikan `dist/` sebagai situs statis telah diuji lokal. Domain, persetujuan data bisnis, dan peluncuran berada pada pemilik.
+Checkpoint terbaru **23 November 2026**. Situs publik berjalan di Cloudflare Workers menurut konfirmasi pemilik. Backend CMS GitHub telah disiapkan dan diuji lokal.
+
+## Akses CMS daring
+
+- [x] Periksa 404 pada `/admin`. Build publik sebelumnya memakai konfigurasi CMS tanpa repository daring. Repository yang terhubung menggunakan GitHub.
+- [x] Konfigurasikan backend GitHub untuk `randiprabowo/Landas-Creative`, branch `main`. Token pribadi dimasukkan oleh pengguna melalui panel CMS. Alur GitLab PKCE tetap tersedia.
+- [x] Lulus check tipe, 40 tes, build, pemeriksaan rute `/admin` pada Wrangler, dan pemeriksaan layar masuk token pada Chrome. Audit aset dan rute publik lulus. [Hasil audit](verification/cms-github/build-audit.json)
+- [ ] Pemilik mendorong perubahan ke branch Cloudflare, membuat token yang dibatasi ke repository, dan memeriksa login pada deployment terbaru. [Panduan akses editor](DEPLOYMENT_GUIDE.md#akses-editor-setelah-mvp)
 
 ## Deploy Cloudflare
 
