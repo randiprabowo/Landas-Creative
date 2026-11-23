@@ -1,8 +1,21 @@
 # Panduan rilis dan rollback — Landas Creative
 
-Status: persiapan lokal Tahap 6. **Belum ada hosting/domain yang dipilih, akun dibuat, DNS diubah, biaya dipasang, atau website dipublikasikan.** Build dan snapshot lokal bukan persetujuan publikasi.
+Status persiapan lokal. Konfigurasi Cloudflare Workers Static Assets tersedia untuk project `landas-creative`. Pemilik memilih kapan menjalankan deploy dan memasang domain.
 
 ## Kontrak hosting statis
+
+### Cloudflare Workers yang terhubung ke Git
+
+Jika log memuat `Executing user deploy command: npx wrangler deploy`, project itu memakai Workers Builds. [wrangler.jsonc](../wrangler.jsonc) mengarahkan Wrangler ke hasil build Astro di `dist/`, mengatur URL tanpa garis miring di akhir dan menyajikan halaman 404 situs dengan status HTTP 404. Wrangler menggunakan konfigurasi ini untuk deploy aset statis. [Konfigurasi situs statis Cloudflare](https://developers.cloudflare.com/workers/static-assets/routing/static-site-generation/)
+
+| Pengaturan Worker | Nilai |
+| --- | --- |
+| Root directory | Root repository, tempat `package.json` dan `wrangler.jsonc` berada |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Nama Worker | `landas-creative`, sesuai log Cloudflare |
+
+Cloudflare perlu membangun commit yang berisi `wrangler.jsonc`. Upload manual lewat **Cloudflare Pages Direct Upload** juga bisa menggunakan hasil build `dist/` yang sama. [Integrasi build Workers](https://developers.cloudflare.com/workers/ci-cd/builds/) · [Panduan Pages Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/)
 
 ### Akses editor setelah MVP
 
@@ -36,7 +49,7 @@ Website dibangun oleh Astro menjadi berkas statis. Hosting menjalankan `npm ci` 
 | Preview privat | Bila diunggah ke staging, gunakan kontrol akses hosting yang disetujui dan noindex. Noindex sendiri tidak membuat staging privat. |
 | Pemulihan versi | Host harus mendukung pergantian ke deployment/artefak sebelumnya secara utuh dan peninjauan log kegagalan. |
 
-Pilihan provider, pemilik akun, anggaran, domain/registrar, DNS, kebijakan log akses/retensi, dan pengaturan cache/redirect tetap belum ditetapkan. Tidak ada rekomendasi paket berbayar atau jaminan fitur provider dalam dokumen ini. Setelah host ditentukan, cocokkan kontrak di atas dengan dokumentasi resminya dan catat konfigurasi sebenarnya.
+Pemilik menetapkan akun, anggaran, domain, DNS, serta kebijakan log akses dan retensi. Uji kontrak di atas pada alamat deployment yang dipilih.
 
 Rujukan: [deployment statis Astro](https://docs.astro.build/en/guides/deploy/) dan [npm ci](https://docs.npmjs.com/cli/v12/commands/npm-ci/). `npm ci` digunakan untuk mengikuti lockfile; pengujian instalasi bersih Tahap 6 dilakukan pada salinan terpisah agar instalasi kerja tidak ditimpa.
 
@@ -46,7 +59,7 @@ Rujukan: [deployment statis Astro](https://docs.astro.build/en/guides/deploy/) d
 2. **Build review**: `npm run build`/snapshot; berisi konten published saja, saat ini noindex, katalog kosong, dan kontak nonaktif. Boleh ditinjau lokal; status ini tidak menyatakan MVP bisnis siap diluncurkan.
 3. **Rilis disetujui**: hasil build yang sama persis dengan versi yang diperiksa setelah data/domain/kanal resmi dan instruksi publikasi tersedia. Tidak dibuat atau dipublikasikan secara otomatis oleh skrip.
 
-Git lokal sudah diinisialisasi untuk editor. Commit, remote dan CI/CD belum disiapkan. Simpan cadangan sumber dan bukti persetujuan sebelum perubahan besar.
+Git menyediakan riwayat perubahan sumber. Simpan cadangan sumber dan bukti persetujuan sebelum perubahan besar.
 
 ## Persiapan konten dan data
 

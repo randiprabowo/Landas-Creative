@@ -1,6 +1,13 @@
 # Rencana implementasi — Landas Creative
 
-Checkpoint terbaru **22 November 2026**. Hero dan detail layanan/properti mendukung media tambahan. Tombol chat membuka formulir konsultasi. Domain, hosting, persetujuan data bisnis, dan peluncuran berada pada pemilik.
+Checkpoint terbaru **23 November 2026**. Konfigurasi Cloudflare Workers untuk menyajikan `dist/` sebagai situs statis telah diuji lokal. Domain, persetujuan data bisnis, dan peluncuran berada pada pemilik.
+
+## Deploy Cloudflare
+
+- [x] Tinjau log pemilik. Build Astro menghasilkan sembilan halaman. Tahap deploy gagal saat konfigurasi otomatis Wrangler mencari `public/.assetsignore`.
+- [x] Tambahkan [wrangler.jsonc](../wrangler.jsonc) untuk Worker `landas-creative` dengan direktori aset `dist/`. Perbarui [panduan build Cloudflare](DEPLOYMENT_GUIDE.md#cloudflare-workers-yang-terhubung-ke-git).
+- [x] Uji Wrangler 4.166.0 dengan `deploy --dry-run` dan server lokal. Beranda, properti, kontak, robots, sitemap, dan CSS merespons HTTP 200. URL dengan garis miring di akhir dialihkan ke URL kanonis. Halaman tidak dikenal, admin, dan preview merespons HTTP 404.
+- [ ] Pemilik memasukkan konfigurasi ke branch yang terhubung, lalu memeriksa hasil deployment Cloudflare.
 
 ## Media tambahan dan konsultasi
 
